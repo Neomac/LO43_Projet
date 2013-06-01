@@ -6,6 +6,10 @@ public class Tache {
 	private String LieuDepart;	
 	private String LieuArrivee;
 	
+	public Tache(){
+		HeureDepart = HeureArrivee = 0;
+		LieuDepart = LieuArrivee = "";
+	}
 	
 	public Tache(int heureDepart, int heureArrivee, String lieuDepart, String lieuArrivee) {
 		HeureDepart = heureDepart;

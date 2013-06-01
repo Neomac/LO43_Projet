@@ -21,9 +21,12 @@ public class Main {
 				BufferedReader br = new BufferedReader(new InputStreamReader(in));
 				String strLine, c;
 				
+				Vector<Tache> T = new Vector<Tache>();
+				
 				while((strLine = br.readLine()) != null){
 					
-					
+					Tache NouvelleTache = new Tache();
+
 					
 					c=strLine.substring(0,2);
 					c=c.trim();
