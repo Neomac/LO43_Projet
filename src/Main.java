@@ -1,6 +1,6 @@
 //Lecture du fichier d'instance
 
-import java.io.*;
+import java.io.*;  // Test pour GitHub
 import java.util.Vector;
 
 public class Main {
