@@ -1,11 +1,12 @@
 //Lecture du fichier d'instance
 
 import java.io.*;  // Test pour GitHub
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class Fichier {
 	
-	private static Vector<Tache> Taches = new Vector<Tache>();
+	protected static ArrayList<Tache> Taches = new ArrayList<Tache>();
 	
 	
 	public static void main(String args[]){
@@ -46,7 +47,7 @@ public class Fichier {
 				}
 				in.close();
 				
-				PrintVector(Taches);
+				PrintVector();
 				
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -54,9 +55,9 @@ public class Fichier {
 			}
 			
 		}
-	public static void PrintVector(Vector<Tache> T){
-		for (int i=0; i<T.size(); i++){
-			(T.get(i)).PrintTache();
+	public static void PrintVector(){
+		for (int i=0; i<Taches.size(); i++){
+			(Taches.get(i)).PrintTache();
 		}
 	}
 }
