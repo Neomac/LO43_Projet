@@ -9,11 +9,11 @@ public class TrieTache1er extends Fichier {
 		TrieTache1er resultat = new TrieTache1er();
 		Fichier base = new Fichier();
 		base.LectureFichier();
-		resultat.listeTacheOrga.addElement(base.Taches.());
+		resultat.listeTacheOrga.addElement(base.Taches.get(base.Taches.size()));
 		
 		int cursorListeOrga = 0;
 		int cursorBase = 0;
-		Tache temp = base.Taches.lastElement();
+		Tache temp = base.Taches.get(base.Taches.size());
 		while (cursorBase < base.Taches.size()){ // Parcours de la base
 			if (listeTacheOrga.get(cursorListeOrga).getLieuArrivee() == base.Taches.get(cursorBase).getLieuDepart()){  // Regarde sur le lieu d'arrivŽ est bien le lieu de depart
 				if (temp.getHeureDepart()-listeTacheOrga.get(cursorListeOrga).getHeureArrivee() > base.Taches.get(cursorBase).getHeureDepart() - listeTacheOrga.get(cursorListeOrga).getHeureArrivee()){  // Regarde si le temps d'attente est meilleur que l'actuel
@@ -35,7 +35,7 @@ public class TrieTache1er extends Fichier {
 	
 	
 	public TrieTache1er(){
-		listeTacheOrga = Vector<Tache>;
+		listeTacheOrga = new ArrayList<Tache>;
 	}
 	
 	public Vector<Tache> getListeTacheOrga() {
