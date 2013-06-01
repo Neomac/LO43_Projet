@@ -5,7 +5,7 @@ import java.util.Vector;
 
 public class Fichier {
 	
-	private Vector<Tache> Taches;
+	private static Vector<Tache> Taches = new Vector<Tache>();
 	
 	
 	public static void main(String args[]){
@@ -20,8 +20,6 @@ public class Fichier {
 				DataInputStream in = new DataInputStream(fstream);
 				BufferedReader br = new BufferedReader(new InputStreamReader(in));
 				String strLine, c;
-				
-				Vector<Tache> T = new Vector<Tache>();
 				
 				while((strLine = br.readLine()) != null){
 					
@@ -43,12 +41,12 @@ public class Fichier {
 					B=strLine.substring(23,24);
 					
 					Tache NouvelleTache = new Tache(a, b, A, B);
-					T.add(NouvelleTache);
+					Taches.add(NouvelleTache);
 					
 				}
 				in.close();
 				
-				PrintVector(T);
+				PrintVector(Taches);
 				
 			} catch (Exception e) {
 				// TODO: handle exception

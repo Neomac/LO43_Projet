@@ -18,6 +18,10 @@ public class Tache {
 		LieuArrivee = lieuArrivee;
 	}
 	
+	public void PrintTache(){
+		System.out.println(getHeureDepart()+" "+getHeureArrivee()+" "+getLieuDepart()+" "+getLieuArrivee());
+	}
+	
 	public int getHeureDepart() {
 		return HeureDepart;
 	}
