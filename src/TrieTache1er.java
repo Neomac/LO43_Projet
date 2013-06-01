@@ -1,19 +1,20 @@
+import java.util.ArrayList;
 import java.util.Vector;
 
 
 public class TrieTache1er extends Fichier {
 	
-	private static Vector<Tache> listeTacheOrga;
+	private static ArrayList<Tache> listeTacheOrga;
 
 	public TrieTache1er TrieTache(){
 		TrieTache1er resultat = new TrieTache1er();
 		Fichier base = new Fichier();
 		base.LectureFichier();
-		resultat.listeTacheOrga.addElement(base.Taches.get(base.Taches.size()));
+		resultat.listeTacheOrga.add(base.Taches.get(0));
 		
 		int cursorListeOrga = 0;
 		int cursorBase = 0;
-		Tache temp = base.Taches.get(base.Taches.size());
+		Tache temp = base.Taches.get(0);
 		while (cursorBase < base.Taches.size()){ // Parcours de la base
 			if (listeTacheOrga.get(cursorListeOrga).getLieuArrivee() == base.Taches.get(cursorBase).getLieuDepart()){  // Regarde sur le lieu d'arrivŽ est bien le lieu de depart
 				if (temp.getHeureDepart()-listeTacheOrga.get(cursorListeOrga).getHeureArrivee() > base.Taches.get(cursorBase).getHeureDepart() - listeTacheOrga.get(cursorListeOrga).getHeureArrivee()){  // Regarde si le temps d'attente est meilleur que l'actuel
@@ -35,14 +36,17 @@ public class TrieTache1er extends Fichier {
 	
 	
 	public TrieTache1er(){
-		listeTacheOrga = new ArrayList<Tache>;
+		ArrayList liste = new ArrayList<Tache>();
+		Tache temp = new Tache(0, 0, "", "");
+		listeTacheOrga = liste;
+		//listeTacheOrga.add(temp);
 	}
 	
-	public Vector<Tache> getListeTacheOrga() {
+	public ArrayList<Tache> getListeTacheOrga() {
 		return listeTacheOrga;
 	}
 
-	public void setListeTacheOrga(Vector<Tache> listeTacheOrga) {
+	public void setListeTacheOrga(ArrayList<Tache> listeTacheOrga) {
 		this.listeTacheOrga = listeTacheOrga;
 	}
 	
