@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Vector;
 
 
 public class TrieTache1er extends Fichier {
