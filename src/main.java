@@ -13,8 +13,7 @@ public class main {
     Solution testSolution = new Solution();
     testSolution.LectureSolution();
     
-    //Test commit
-    
+    //Test commit 2
     
   }
 
