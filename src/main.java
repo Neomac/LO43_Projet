@@ -11,7 +11,10 @@ public class main {
 		testFichier.LectureInstance();
 		testFichier.PrintArray();
 		
-
+		Solution testSolution = new Solution();
+		testSolution.LectureSolution();
+		
+		
 	}
 
 }
