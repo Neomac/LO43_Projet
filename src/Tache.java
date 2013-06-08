@@ -22,7 +22,7 @@ public class Tache {
 	}
 	
 	public void PrintTache(){
-		System.out.println(getNumeroTache()+" "+getHeureDepart()+" "+getHeureArrivee()+" "+getLieuDepart()+" "+getLieuArrivee());
+		System.out.println("Task:"+getNumeroTache()+" startTime:"+getHeureDepart()+" finishTime:"+getHeureArrivee()+getLieuDepart()+getLieuArrivee());
 	}
 	
 	public int getNumeroTache() {
