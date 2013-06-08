@@ -6,11 +6,12 @@ public class main {
 	 */
 	public static void main(String[] args) {
 		
+		System.out.println("RŽsultat de la lecture du fichier:");
 		Fichier testFichier = new Fichier();
-		testFichier.LectureFichier();
-		TrieTache1er listeOrganise = new TrieTache1er();
-		listeOrganise.TrieTache();
-		listeOrganise.PrintListeTache();
+		testFichier.LectureInstance();
+		testFichier.PrintArray();
+		
+
 	}
 
 }
