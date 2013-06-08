@@ -30,5 +30,5 @@ public class FenetreChauffeur extends JFrame {
 		  public static void main(String[] args){
 		    FenetreChauffeur fen = new FenetreChauffeur();
 		    fen.setVisible(true);
-		  }   
+		  }   //Test
 }
