@@ -8,7 +8,6 @@ public class TrieTache1er extends Fichier {
 	public TrieTache1er TrieTache(){
 		TrieTache1er resultat = new TrieTache1er();
 		Fichier base = new Fichier();
-		base.LectureFichier();
 		resultat.listeTacheOrga.add(base.Taches.get(0));
 		
 		int cursorListeOrga = 0;

@@ -3,17 +3,20 @@
 import java.io.*;  // Test pour GitHub
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.StringTokenizer;
 
 public class Fichier {
 	
 	protected static ArrayList<Tache> Taches = new ArrayList<Tache>();
 	
 	
+	/* A effacer
 	public static void main(String args[]){
 		LectureFichier();
 	}
+	*/
 	
-	public static void LectureFichier(){
+	public static void LectureInstance(){
 		int a, b;
 		String A, B; 
 			try {
@@ -24,30 +27,19 @@ public class Fichier {
 				
 				while((strLine = br.readLine()) != null){
 					
-					c=strLine.substring(0,2);
-					c=c.trim();
-					a = Integer.parseInt(c);
-					c=strLine.substring(3,5);
-					c=c.trim();
-					a = a*60 + Integer.parseInt(c);
+					StringTokenizer st = new StringTokenizer(strLine, " ");
 					
-					c=strLine.substring(9,11);
-					c=c.trim();
-					b = Integer.parseInt(c);
-					c=strLine.substring(12,14);
-					c=c.trim();
-					b = b*60 + Integer.parseInt(c);
-					
-					A=strLine.substring(18,19);
-					B=strLine.substring(23,24);
+					a=Integer.parseInt(st.nextToken());
+					a = a*60 + Integer.parseInt(st.nextToken());
+					b=Integer.parseInt(st.nextToken());
+					b = b*60 + Integer.parseInt(st.nextToken());
+					A=st.nextToken();
+					B=st.nextToken();
 					
 					Tache NouvelleTache = new Tache(a, b, A, B);
 					Taches.add(NouvelleTache);
-					
 				}
 				in.close();
-				
-				PrintVector();
 				
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -55,7 +47,7 @@ public class Fichier {
 			}
 			
 		}
-	public static void PrintVector(){
+	public static void PrintArray(){
 		for (int i=0; i<Taches.size(); i++){
 			(Taches.get(i)).PrintTache();
 		}
