@@ -32,4 +32,12 @@ public class Solution {
 			System.out.println("Erreur de lecture du fichier d'instance!");
 		}
 	}
+	
+	public int getCoutTotal() {
+		return coutTotal;
+	}
+
+	public void setCoutTotal(int coutTotal) {
+		this.coutTotal = coutTotal;
+	}
 }

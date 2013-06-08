@@ -17,7 +17,7 @@ public class Fichier {
 	*/
 	
 	public static void LectureInstance(){
-		int a, b;
+		int i=1, a, b;
 		String A, B; 
 			try {
 				FileInputStream fstream = new FileInputStream("Instance_1.txt");
@@ -36,8 +36,9 @@ public class Fichier {
 					A=st.nextToken();
 					B=st.nextToken();
 					
-					Tache NouvelleTache = new Tache(a, b, A, B);
+					Tache NouvelleTache = new Tache(i, a, b, A, B);
 					Taches.add(NouvelleTache);
+					i++;
 				}
 				in.close();
 				
