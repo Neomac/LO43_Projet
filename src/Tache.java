@@ -1,27 +1,36 @@
 
 
 public class Tache {
+	private int numeroTache;
 	private int HeureDepart; 	//En minutes
 	private int HeureArrivee;	//En minutes
 	private String LieuDepart;	
 	private String LieuArrivee;
 	
+
 	public Tache(){
 		HeureDepart = HeureArrivee = 0;
 		LieuDepart = LieuArrivee = "";
 	}
 	
-	public Tache(int heureDepart, int heureArrivee, String lieuDepart, String lieuArrivee) {
-		HeureDepart = heureDepart;
-		HeureArrivee = heureArrivee;
-		LieuDepart = lieuDepart;
-		LieuArrivee = lieuArrivee;
+	public Tache(int _numeroTache, int _heureDepart, int _heureArrivee, String _lieuDepart, String _lieuArrivee) {
+		numeroTache = _numeroTache;
+		HeureDepart = _heureDepart;
+		HeureArrivee = _heureArrivee;
+		LieuDepart = _lieuDepart;
+		LieuArrivee = _lieuArrivee;
 	}
 	
 	public void PrintTache(){
-		System.out.println(getHeureDepart()+" "+getHeureArrivee()+" "+getLieuDepart()+" "+getLieuArrivee());
+		System.out.println(getNumeroTache()+" "+getHeureDepart()+" "+getHeureArrivee()+" "+getLieuDepart()+" "+getLieuArrivee());
 	}
 	
+	public int getNumeroTache() {
+		return numeroTache;
+	}
+	public void setNumeroTache(int numeroTache) {
+		this.numeroTache = numeroTache;
+	}
 	public int getHeureDepart() {
 		return HeureDepart;
 	}
@@ -46,7 +55,5 @@ public class Tache {
 	public void setLieuArrivee(String lieuArrivee) {
 		LieuArrivee = lieuArrivee;
 	}
-	
-
 	
 }
