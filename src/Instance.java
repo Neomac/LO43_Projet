@@ -9,12 +9,12 @@ import java.util.StringTokenizer;
 
 public class Instance {
 	
-	protected static ArrayList<Tache> tachesInstance = new ArrayList<Tache>();
+	private ArrayList<Tache> tachesInstance = new ArrayList<Tache>();
 		
-	public static void LectureInstance(){
+	public void LectureInstance(){
 		int i=1;
 			try {
-				FileInputStream fstream = new FileInputStream("Instance_1.txt");
+				FileInputStream fstream = new FileInputStream("Instance_3.txt");
 				DataInputStream in = new DataInputStream(fstream);
 				BufferedReader br = new BufferedReader(new InputStreamReader(in));
 				String strLine;
@@ -22,7 +22,7 @@ public class Instance {
 				while((strLine = br.readLine()) != null){
 					StringTokenizer st = new StringTokenizer(strLine, " ");
 					Tache NouvelleTache = new Tache(i, Integer.parseInt(st.nextToken())*60+Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())*60+Integer.parseInt(st.nextToken()), st.nextToken(), st.nextToken());
-					tachesInstance.add(NouvelleTache);
+					this.tachesInstance.add(NouvelleTache);
 					i++;
 				}
 				in.close();
@@ -33,9 +33,9 @@ public class Instance {
 			}
 			
 		}
-	public static void PrintArray(){
-		for (int i=0; i<tachesInstance.size(); i++){
-			(tachesInstance.get(i)).PrintTache();
+	public  void PrintArray(){
+		for (int i=0; i<this.tachesInstance.size(); i++){
+			(this.tachesInstance.get(i)).PrintTache();
 		}
 	}
 }

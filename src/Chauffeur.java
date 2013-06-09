@@ -8,19 +8,41 @@ public class Chauffeur {
 	private	int underTime;
 	private int idleTime;
 	private int cost;
-	protected static ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();
+	private ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();
 
-	public void PrintTachesChauffeur(){
+	public Chauffeur(){
+		numeroChauffeur=0;
+		workerTimeSum=0;
+		underTime=0;
+		idleTime=0;
+		cost=0;
+	}
+	
+	public Chauffeur(int _numeroChauffeur, int _workerTimeSum, int _underTime, int _idleTime, int _cost){
+		numeroChauffeur=_numeroChauffeur;
+		workerTimeSum=_workerTimeSum;
+		underTime=_underTime;
+		idleTime=_idleTime;
+		cost=_cost;
+	}
+	
+	public void AjouterTacheChauffeur(Tache T){
+		tachesChauffeur.add(T);
+	}
+	
+	public void PrintChauffeur(){
+		int i;
 		System.out.println("----Worker "+getNumeroChauffeur()+"'s task(s)----");
 		System.out.println();
 		System.out.println("WorkerTimeSum="+getWorkerTimeSum());
-		System.out.println("UnderTime="+getUnderTime());
-		System.out.println("IdleTime="+getIdleTime());
+		System.out.println("UnderTime = "+getUnderTime());
+		System.out.println("IdleTime = "+getIdleTime());
 		System.out.println("Cost="+getCost());
-		for (int i=0; i<tachesChauffeur.size(); i++){
+		for (i=0; i<(tachesChauffeur.size())-1; i++){
 			(tachesChauffeur.get(i)).PrintTache();
 			System.out.println("");
 		}
+		(tachesChauffeur.get(i++)).PrintTache();
 	}
 	
 	public int getNumeroChauffeur() {
