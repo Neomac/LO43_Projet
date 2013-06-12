@@ -10,12 +10,16 @@ import java.util.StringTokenizer;
 public class Solution {
 	private int coutTotal;
 	private int nombreChauffeurs;
+	private int totalIdleTime;
+	private int totalUnderTime;
 	protected static ArrayList<Chauffeur> Chauffeurs = new ArrayList<Chauffeur>();
 	
 
 	public Solution(){
 		coutTotal=0;
 		nombreChauffeurs=0;
+		totalIdleTime=0;
+		totalUnderTime=0;
 	}
 	
 	public void LectureSolution(String fichierSolution){
@@ -27,7 +31,7 @@ public class Solution {
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			
 			String strLine, c="";
-			nombreChauffeurs=0;
+			this.nombreChauffeurs=0;
 			
 			strLine = br.readLine();
 			StringTokenizer st = new StringTokenizer(strLine, " ");
@@ -42,7 +46,7 @@ public class Solution {
 				i++;
 				Chauffeur nouveauChauffeur = new Chauffeur();
 				nouveauChauffeur.setNumeroChauffeur(i);
-				nombreChauffeurs++;
+				this.nombreChauffeurs++;
 				marker1=0;
 				
 				strLine = br.readLine();
@@ -54,12 +58,14 @@ public class Solution {
 				st.nextToken();
 				st.nextToken();
 				nouveauChauffeur.setUnderTime(Integer.parseInt(st.nextToken()));
+				this.totalUnderTime+=nouveauChauffeur.getUnderTime();
 				
 				strLine = br.readLine();
 				st = new StringTokenizer(strLine, " ");
 				st.nextToken();
 				st.nextToken();
 				nouveauChauffeur.setIdleTime(Integer.parseInt(st.nextToken()));
+				this.totalIdleTime+=nouveauChauffeur.getIdleTime();
 				
 				strLine = br.readLine();
 				nouveauChauffeur.setCost(Integer.parseInt(strLine.substring(5)));
@@ -93,11 +99,11 @@ public class Solution {
 						strLine=br.readLine();
 					}
 				}
-				Chauffeurs.add(nouveauChauffeur);
+				this.Chauffeurs.add(nouveauChauffeur);
 			}
 			strLine = br.readLine();
 			strLine = br.readLine();
-			coutTotal=Integer.parseInt(strLine.substring(10));
+			this.coutTotal=Integer.parseInt(strLine.substring(10));
 			
 			in.close();
 			
@@ -110,12 +116,14 @@ public class Solution {
 	
 	public void PrintSolution(){
 		System.out.println("**********The solution contains "+getNombreChauffeurs()+" driver(s).**********");
-		for (int i=0; i<Chauffeurs.size(); i++){
-			(Chauffeurs.get(i)).PrintChauffeur();
+		for (int i=0; i<this.Chauffeurs.size(); i++){
+			(this.Chauffeurs.get(i)).PrintChauffeur();
 		}
 		System.out.println("--------------------------------");
 		System.out.println();
-		System.out.println("TotaleCost="+getCoutTotal());
+		System.out.println("TotalCost="+this.getCoutTotal());
+		System.out.println("TotalUnderTime="+this.getUnderTime());
+		System.out.println("TotalIdleTime="+this.getIdleTime());
 	}
 	
 	public Chauffeur getChauffeur(int i){
@@ -137,4 +145,22 @@ public class Solution {
 	public void setNombreChauffeurs(int nombreChauffeurs) {
 		this.nombreChauffeurs = nombreChauffeurs;
 	}
+
+	public int getIdleTime() {
+		return totalIdleTime;
+	}
+
+	public int getUnderTime() {
+		return totalUnderTime;
+	}
+
+	public void setIdleTime(int idleTime) {
+		this.totalIdleTime = idleTime;
+	}
+
+	public void setUnderTime(int underTime) {
+		this.totalUnderTime = underTime;
+	}
+	
+	
 }
