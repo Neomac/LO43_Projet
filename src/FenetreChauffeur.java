@@ -15,7 +15,7 @@ public class FenetreChauffeur extends JFrame {
             Solution testSolution = new Solution();
             testSolution.LectureSolution(fichierSolution);
 		 
-		    //Les donn�es du tableau
+		    //Les données du tableau
 		    String[][] data = new String[testSolution.getChauffeurs().size()][2];
 
             for (int i = 0; i < testSolution.getChauffeurs().size(); i++){
@@ -26,8 +26,6 @@ public class FenetreChauffeur extends JFrame {
 		    //Les titres des colonnes
 		    String  title[] = {"Numéro Chauffeur", "Cout"};
 		    JTable tableau = new JTable(data, title);
-		    //Nous ajoutons notre tableau � notre contentPane dans un scroll
-		    //Sinon les titres des colonnes ne s'afficheront pas !
 		    this.getContentPane().add(new JScrollPane(tableau));
 		  }   
 		 
