@@ -28,7 +28,6 @@ public class Fenetre2 extends JFrame{
 	    JPanel pan3 = new JPanel();
 	    JPanel pan4 = new JPanel();
 	    JPanel content = new JPanel();
-	    //JPanel ultima = new JPanel();
 	    
 	    JPanel pan6 = new JPanel();
 	    
@@ -52,24 +51,26 @@ public class Fenetre2 extends JFrame{
 	    
 	    //Création d'onglets
 	    onglet1 = new JTabbedPane();
-	    //onglet1.add("Chauffeur", pan1);
-	    //onglet1.add(pan2);
 	    onglet1.add(content);
-	    //onglet2 = new JTabbedPane();
 	    onglet1.add(pan3);
 
 	    this.getContentPane().add(onglet1, BorderLayout.NORTH);
-	    //this.getContentPane().add(onglet2, BorderLayout.CENTER);
 	    
 	    OuvrirFichier test = new OuvrirFichier();
-	    OuvrirFichier tableau = new OuvrirFichier();
+	    OuvrirFichier lecture = new OuvrirFichier();
 	    
 	    JPanel pan5 = new JPanel();
 	    pan5 = test.OuvrirFichier();
+	    //JPanel pan7 = new JPanel();
+	    //pan7 = lecture.AffichageFichier();
 	    
+	    //this.getContentPane().add(pan7, BorderLayout.CENTER);
+	    JTabbedPane ongletFichier = new JTabbedPane();
+	    ongletFichier = lecture.OuvrirFichier1();
+	    this.getContentPane().add(ongletFichier, BorderLayout.SOUTH);
 	    onglet2 = new JTabbedPane();
 	    onglet2.add(pan5);
-	    this.getContentPane().add(onglet2, BorderLayout.SOUTH);
+	    //this.getContentPane().add(onglet2, BorderLayout.SOUTH);
 	    onglet3 = new JTabbedPane();
 	    //onglet3.add(pan6);
 	    
@@ -77,84 +78,9 @@ public class Fenetre2 extends JFrame{
 	    JTextArea tacheListe = new JTextArea();
 	    tacheListe.append(null);
 	    
-	    //----------------------------------
-	    
-	    //String fichierSolution = "Solution_3.txt";
-	    /*
-	    JTable tableau;
-	    
-	    
-	    if(test.getActionSouris() == test.getOpenFile().APPROVE_OPTION){
-	    	//String fichierSolution = test.getFile().getName();
-	    	Solution testSolution = new Solution();
-	    	//testSolution.LectureSolution(fichierSolution);
-	    	System.out.println("Coucou Antoine");
-	    	
-		    //Les données du tableau
-		    String[][] data = new String[testSolution.getChauffeurs().size()][2];
-	
-		    for (int i = 0; i < testSolution.getChauffeurs().size(); i++){
-		        data[i][0] = String.valueOf(testSolution.getChauffeurs().get(i).getNumeroChauffeur());
-		        data[i][1] = Integer.toString(testSolution.getChauffeurs().get(i).getCost());
-		    }
-		    
-		    tableau = new JTable(data, title);
-		    //Les titres des colonnes
-		    
-		   
-		    //this.getContentPane().add(new JScrollPane(tableau));
-		  	
-		    //----------------------------------
-	    }
-	    else{
-	    	String[][] vide = {
-	    			{" "," "}
-	    	};
-	    	tableau = new JTable(vide, title);
-	    	System.out.println("Aurevoir Antoine");
-	    }
-	    */
-	    //String  title[] = {"Numéro Chauffeur", "Cout"};
-	    //String[][] vide = {
-	    //		{" "," "}
-	    //};
-	    //JTabbedPane onglet4 = new JTabbedPane();
-	    //pan6 = tableau.creerTableau();
 	    JTextArea test1 = new JTextArea();
 	    pan6.add(test1);
-	    //JPanel pan7 = new JPanel();
-	    //pan7 = tableau.creerTableau();
-	    //onglet4.add(pan6);
-	    //onglet4.add(pan7);
-	    //pan6.add(test.getTableau());
-	    //pan6.add(tableau);
-	    //pan6.add(new JScrollPane(tableau));
-	    //this.getContentPane().add(pan6, BorderLayout.CENTER);
-	    //this.getContentPane().add(onglet4, BorderLayout.CENTER);
 	    
 	}
-	/*
-	String fichierSolution = "Solution_1.txt";
-    Solution testSolution = new Solution();
-    testSolution.LectureSolution(fichierSolution);
- 
-    //Les données du tableau
-    String[][] data = new String[testSolution.getChauffeurs().size()][2];
 
-    for (int i = 0; i < testSolution.getChauffeurs().size(); i++){
-        data[i][0] = String.valueOf(testSolution.getChauffeurs().get(i).getNumeroChauffeur());
-        data[i][1] = Integer.toString(testSolution.getChauffeurs().get(i).getCost());
-    }
- 
-    //Les titres des colonnes
-    String  title[] = {"Numéro Chauffeur", "Cout"};
-    JTable tableau = new JTable(data, title);
-    this.getContentPane().add(new JScrollPane(tableau));
-  }   
- 
-  public static void main(String[] args){
-    FenetreChauffeur fen = new FenetreChauffeur();
-    fen.setVisible(true);
-  } //Test commit
-  */
 }

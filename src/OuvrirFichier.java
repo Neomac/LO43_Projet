@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTabbedPane;
 
 public class OuvrirFichier extends JPanel implements ActionListener {
 	private JFileChooser OpenFile;
@@ -28,20 +29,41 @@ public class OuvrirFichier extends JPanel implements ActionListener {
 		OpenButton.addActionListener(this);
 		JPanel buttonPanel = new JPanel(); 
         buttonPanel.add(OpenButton, BorderLayout.SOUTH);
-        //Texte = new JTextArea(10,10);
-        //buttonPanel.add(new JScrollPane(Texte), BorderLayout.CENTER);
-        String  title[] = {"Numéro Chauffeur", "Cout"};
+        Texte = new JTextArea(10,10);
+        buttonPanel.add(new JScrollPane(Texte), BorderLayout.CENTER);
+        /*String  title[] = {"Numéro Chauffeur", "Cout"};
         String[][] data = {
     			{"test ","test "}
-    	};
-        tableau = new JTable(data, title);
-        buttonPanel.add(new JScrollPane(tableau), BorderLayout.CENTER);
+    	};*/
+        //tableau = new JTable(data, title);
+        //buttonPanel.add(new JScrollPane(tableau), BorderLayout.CENTER);
         /*
         String  title[] = {"Numéro Chauffeur", "Cout"};
         tableau = new JTable();
         */
         return buttonPanel;        
 	}
+	public JTabbedPane OuvrirFichier1(){
+		JTabbedPane onglet = new JTabbedPane();
+		JPanel temp = new JPanel();
+		OpenFile = new JFileChooser();
+		JButton OpenButton = new JButton("Ouvrir un fichier");
+		OpenButton.addActionListener(this);
+		JPanel buttonPanel = new JPanel(); 
+        buttonPanel.add(OpenButton);
+        Texte = new JTextArea(10,10);
+        temp.add(new JScrollPane(Texte));
+        onglet.add(buttonPanel);
+        onglet.add(temp);
+        return onglet;
+	}
+	/*
+	public JPanel AffichageFichier(){
+		JPanel temp = new JPanel();
+		Texte = new JTextArea(10,10);
+        temp.add(new JScrollPane(Texte), BorderLayout.CENTER);
+        return temp;
+	}*/
 	
 	public JPanel creerTableau(){
 		JPanel temp = new JPanel();
@@ -70,9 +92,9 @@ public class OuvrirFichier extends JPanel implements ActionListener {
 			    	testSolution.LectureSolution(fichierSolution);
 			    	System.out.println("Coucou Antoine");
 			    	
-			    	//for(int i = 0; i < testSolution.getChauffeurs().size();i++){
-			    	//Texte.append(" " + testSolution.getChauffeurs().get(i).getNumeroChauffeur() + "\n");
-			    	//}
+			    	for(int i = 0; i < testSolution.getChauffeurs().size();i++){
+			    		Texte.append(" " + testSolution.getChauffeurs().get(i).getNumeroChauffeur() +"   |   " + testSolution.getChauffeurs().get(i).getCost()+  "\n");
+			    	}
 				    //Les données du tableau
 				    /*String[][]*/ data = new String[testSolution.getChauffeurs().size()][2];
 			
