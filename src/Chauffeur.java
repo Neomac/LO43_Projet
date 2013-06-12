@@ -3,6 +3,7 @@ import java.util.ArrayList;
 //Commit Test 2
 
 public class Chauffeur {
+	private String typeService;
 	private int numeroChauffeur;
 	private int workerTimeSum;
 	private	int underTime;
@@ -11,6 +12,7 @@ public class Chauffeur {
 	private ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();
 
 	public Chauffeur(){
+		typeService="";
 		numeroChauffeur=0;
 		workerTimeSum=0;
 		underTime=0;
@@ -47,6 +49,18 @@ public class Chauffeur {
 	
 	public int getNumeroChauffeur() {
 		return numeroChauffeur;
+	}
+	public String getTypeService() {
+		return typeService;
+	}
+	public ArrayList<Tache> getTachesChauffeur() {
+		return tachesChauffeur;
+	}
+	public void setTypeService(String typeService) {
+		this.typeService = typeService;
+	}
+	public void setTachesChauffeur(ArrayList<Tache> tachesChauffeur) {
+		this.tachesChauffeur = tachesChauffeur;
 	}
 	public int getWorkerTimeSum() {
 		return workerTimeSum;

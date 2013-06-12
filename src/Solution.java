@@ -12,7 +12,11 @@ public class Solution {
 	private int nombreChauffeurs;
 	private int totalIdleTime;
 	private int totalUnderTime;
-	protected static ArrayList<Chauffeur> Chauffeurs = new ArrayList<Chauffeur>();
+	private int serviceMatin;
+	private int serviceJour;
+	private int serviceSoir;
+	private int serviceNuit;
+	protected static ArrayList<Chauffeur> chauffeurs = new ArrayList<Chauffeur>();
 	
 
 	public Solution(){
@@ -99,7 +103,8 @@ public class Solution {
 						strLine=br.readLine();
 					}
 				}
-				this.Chauffeurs.add(nouveauChauffeur);
+				this.chauffeurs.add(nouveauChauffeur);
+				this.chauffeurs.get(this.chauffeurs.size()-1);
 			}
 			strLine = br.readLine();
 			strLine = br.readLine();
@@ -116,8 +121,8 @@ public class Solution {
 	
 	public void PrintSolution(){
 		System.out.println("**********The solution contains "+getNombreChauffeurs()+" driver(s).**********");
-		for (int i=0; i<this.Chauffeurs.size(); i++){
-			(this.Chauffeurs.get(i)).PrintChauffeur();
+		for (int i=0; i<this.chauffeurs.size(); i++){
+			(this.chauffeurs.get(i)).PrintChauffeur();
 		}
 		System.out.println("--------------------------------");
 		System.out.println();
@@ -127,9 +132,49 @@ public class Solution {
 	}
 	
 	public Chauffeur getChauffeur(int i){
-		return Chauffeurs.get(i);
+		return chauffeurs.get(i);
 	}
 	
+	public int getServiceMatin() {
+		return serviceMatin;
+	}
+
+	public int getServiceJour() {
+		return serviceJour;
+	}
+
+	public int getServiceSoir() {
+		return serviceSoir;
+	}
+
+	public int getServiceNuit() {
+		return serviceNuit;
+	}
+
+	public static ArrayList<Chauffeur> getChauffeurs() {
+		return chauffeurs;
+	}
+
+	public void setServiceMatin(int serviceMatin) {
+		this.serviceMatin = serviceMatin;
+	}
+
+	public void setServiceJour(int serviceJour) {
+		this.serviceJour = serviceJour;
+	}
+
+	public void setServiceSoir(int serviceSoir) {
+		this.serviceSoir = serviceSoir;
+	}
+
+	public void setServiceNuit(int serviceNuit) {
+		this.serviceNuit = serviceNuit;
+	}
+
+	public static void setChauffeurs(ArrayList<Chauffeur> chauffeurs) {
+		Solution.chauffeurs = chauffeurs;
+	}
+
 	public int getCoutTotal() {
 		return coutTotal;
 	}
