@@ -19,33 +19,7 @@ public class main {
     testSolution.LectureSolution(fichierSolution);
     testSolution.PrintSolution();
     
-	  
-    //Test commit 2
-    //Coucou c'est nous les dopidop !!!
-    
-    //Test commit 2
-    //Test commit 2
-    
-    //Test Top !
-    //Test Top Test
-    //Test Top Test
-    //Test Top Test
-    //Test Top Test
-    //Test Top Test
-    //Test    23
 
-    //Test 432
-
-    //Test 1 3
-    
-    //test 4
-
-    //Test
-
-    //Test de IntelliJ
-    
-    //Test Trop lol
-    
   }
 
 }
