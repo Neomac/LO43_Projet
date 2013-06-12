@@ -103,8 +103,9 @@ public class Solution {
 						strLine=br.readLine();
 					}
 				}
+				nouveauChauffeur.TypeDeService(nouveauChauffeur.getTache(0));
+				this.TypeService(nouveauChauffeur);
 				this.chauffeurs.add(nouveauChauffeur);
-				this.chauffeurs.get(this.chauffeurs.size()-1);
 			}
 			strLine = br.readLine();
 			strLine = br.readLine();
@@ -127,8 +128,29 @@ public class Solution {
 		System.out.println("--------------------------------");
 		System.out.println();
 		System.out.println("TotalCost="+this.getCoutTotal());
-		System.out.println("TotalUnderTime="+this.getUnderTime());
-		System.out.println("TotalIdleTime="+this.getIdleTime());
+		System.out.println("TotalUnderTime="+this.getUnderTime());				//Ligne en plus par rapport au fichiers solution
+		System.out.println("TotalIdleTime="+this.getIdleTime());				//Ligne en plus par rapport au fichiers solution
+		System.out.println("Services du matin: "+this.getServiceMatin());		//Ligne en plus par rapport au fichiers solution
+		System.out.println("Services du jour: "+this.getServiceJour());			//Ligne en plus par rapport au fichiers solution
+		System.out.println("Services du soir: "+this.getServiceSoir());			//Ligne en plus par rapport au fichiers solution
+		System.out.println("Services de nuit : "+this.getServiceNuit());		//Ligne en plus par rapport au fichiers solution
+	}
+	
+	public void TypeService(Chauffeur c){
+		switch(c.getTypeService()){
+		case 1:
+			this.serviceMatin++;
+			break;
+		case 2:
+			this.serviceJour++;
+			break;
+		case 3:
+			this.serviceSoir++;
+			break;
+		case 4:
+			this.serviceNuit++;
+			break;
+		}
 	}
 	
 	public Chauffeur getChauffeur(int i){
