@@ -9,17 +9,16 @@ public class main {
     
     System.out.println("RŽsultat de la lecture du fichier:");
     
-    Fichier testFichier = new Fichier();
-    testFichier.LectureInstance();
-    testFichier.PrintArray();
+    //Fichier testFichier = new Fichier();
+    //testFichier.LectureInstance();
+    //testFichier.PrintArray();
     
-	  
-    /*String fichierSolution = "Solution_4.txt";
+    String fichierSolution = "Solution_1.txt";
     System.out.println("Lecture du fichier solution");
     Solution testSolution = new Solution();
     testSolution.LectureSolution(fichierSolution);
     testSolution.PrintSolution();
-    */
+    
 	  
     //Test commit 2
     //Coucou c'est nous les dopidop !!!
