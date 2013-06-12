@@ -27,7 +27,7 @@ public class FenetreChauffeur extends JFrame {
 		    String  title[] = {"Numéro Chauffeur", "Cout"};
 		    JTable tableau = new JTable(data, title);
 		    this.getContentPane().add(new JScrollPane(tableau));
-		  }   
+    }
 		 
 		  public static void main(String[] args){
 		    FenetreChauffeur fen = new FenetreChauffeur();
