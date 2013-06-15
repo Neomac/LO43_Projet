@@ -49,7 +49,7 @@ public class Fenetre2 extends JFrame{
 	    content.add(pan4);
 	    this.getContentPane().add(content, BorderLayout.SOUTH);
 	    
-	    //Création d'onglets
+	    //Crï¿½ation d'onglets
 	    onglet1 = new JTabbedPane();
 	    onglet1.add(content);
 	    onglet1.add(pan3);
@@ -74,12 +74,12 @@ public class Fenetre2 extends JFrame{
 	    onglet3 = new JTabbedPane();
 	    //onglet3.add(pan6);
 	    
-	    //Liste de tâches
+	    //Liste de tï¿½ches
 	    JTextArea tacheListe = new JTextArea();
 	    tacheListe.append(null);
 	    
 	    JTextArea test1 = new JTextArea();
-	    pan6.add(test1);
+	    pan6.add(test1); //
 	    
 	}
 
