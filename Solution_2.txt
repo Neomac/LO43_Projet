@@ -1259,6 +1259,6 @@ Cost=303
 task:32	startTime:1066	finishTime:1144AB
 
 task:76	startTime:1150	finishTime:1219BA
-
 --------------------------------
+
 TotalCost=18658

@@ -10,6 +10,7 @@ public class Chauffeur {
 	private int overTime;
 	private int idleTime;
 	private int cost;
+	private int[] heurePause = new int[10];
 	private ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();
 
 	public Chauffeur(){
@@ -31,7 +32,11 @@ public class Chauffeur {
 	}
 	
 	public void AjouterTacheChauffeur(Tache T){
-		tachesChauffeur.add(T);
+		this.tachesChauffeur.add(T);
+	}
+	
+	public void AjouterHeurePause(Integer heure){
+		
 	}
 	
 	public void PrintChauffeur(Solution solution){
@@ -63,6 +68,19 @@ public class Chauffeur {
 			this.typeService=3;				//Service du soir, numŽrotation: 3
 		else if (heure >= 1200 && heure <= 1440)
 			this.typeService=4;				//Service de nuit, numŽrotation: 4
+	}
+	
+	public String PrintService(){
+		String result="";
+		if(this.getTypeService()==1)
+			return result="Service du matin";
+		else if(this.getTypeService()==2)
+			return result="Service du jour";
+		else if(this.getTypeService()==3)
+			return result="Service du soir";
+		else if(this.getTypeService()==4)
+			return result="Service de nuit";
+		return result;
 	}
 	
 	public Tache getTache(int i){
@@ -120,6 +138,13 @@ public class Chauffeur {
 	public void setOverTime(int overTime) {
 		this.overTime = overTime;
 	}
-	
+
+	public int[] getHeurePause() {
+		return heurePause;
+	}
+
+	public void setHeurePause(int[] heurePause) {
+		this.heurePause = heurePause;
+	}
 	
 }

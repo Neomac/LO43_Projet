@@ -162,7 +162,6 @@ public class Solution {
 			strLine = br.readLine();
 			strLine = br.readLine();
 			this.coutTotal=Integer.parseInt(strLine.substring(10));
-			
 			in.close();
 			
 		} catch (Exception e) {
@@ -172,13 +171,15 @@ public class Solution {
 	}
 	
 	public void GenerationSolution(Fichier fichierInstance){
-		int i=0;
+		int i=0, marqueurArret=0, marqueurChoix=0;
 		
 		while(!((fichierInstance.getTaches()).isEmpty())){
 			i++;
 			Chauffeur nouveauChauffeur = new Chauffeur();
 			nouveauChauffeur.setNumeroChauffeur(i);
-			
+			while(nouveauChauffeur.getWorkerTimeSum()<this.getDureeLegale() && marqueurArret==0){
+				
+			}
 		}
 	}
 	
