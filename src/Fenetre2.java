@@ -79,7 +79,7 @@ public class Fenetre2 extends JFrame{
 	    tacheListe.append(null);
 	    
 	    JTextArea test1 = new JTextArea();
-	    pan6.add(test1); //
+	    pan6.add(test1);
 	    
 	}
 
