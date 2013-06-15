@@ -53,6 +53,7 @@ public class Fichier {
 			(this.Taches.get(i)).PrintTache();
 		}
 	}
+<<<<<<< HEAD
 	 
 	public Tache getTache(int i){
 		return this.Taches.get(i);
@@ -69,3 +70,6 @@ public class Fichier {
 }
 
 
+=======
+}
+>>>>>>> branch 'master' of https://github.com/Neomac/LO43_Projet.git
