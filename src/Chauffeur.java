@@ -3,19 +3,21 @@ import java.util.ArrayList;
 //Commit Test 2
 
 public class Chauffeur {
-	private String typeService;
+	private int typeService;
 	private int numeroChauffeur;
 	private int workerTimeSum;
 	private	int underTime;
+	private int overTime;
 	private int idleTime;
 	private int cost;
 	private ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();
 
 	public Chauffeur(){
-		typeService="";
+		typeService=0;
 		numeroChauffeur=0;
 		workerTimeSum=0;
 		underTime=0;
+		overTime=0;
 		idleTime=0;
 		cost=0;
 	}
@@ -32,31 +34,51 @@ public class Chauffeur {
 		tachesChauffeur.add(T);
 	}
 	
-	public void PrintChauffeur(){
+	public void PrintChauffeur(Solution solution){
 		int i;
 		System.out.println("----Worker "+getNumeroChauffeur()+"'s task(s)----");
 		System.out.println();
-		System.out.println("WorkerTimeSum="+getWorkerTimeSum());
-		System.out.println("UnderTime = "+getUnderTime());
-		System.out.println("IdleTime = "+getIdleTime());
-		System.out.println("Cost="+getCost());
-		for (i=0; i<(tachesChauffeur.size())-1; i++){
-			(tachesChauffeur.get(i)).PrintTache();
+		System.out.println("Type de service: "+this.getTypeService());				//Ligne en plus par rapport au fichiers solution
+		System.out.println("WorkerTimeSum="+this.getWorkerTimeSum());
+		if (this.getWorkerTimeSum()<solution.getDureeLegale())
+			System.out.println("UnderTime = "+this.getUnderTime());
+		else
+			System.out.println("OverTime = "+this.getOverTime());
+		System.out.println("IdleTime = "+this.getIdleTime());
+		System.out.println("Cost="+this.getCost());
+		for (i=0; i<(this.tachesChauffeur.size())-1; i++){
+			(this.tachesChauffeur.get(i)).PrintTache();
 			System.out.println("");
 		}
-		(tachesChauffeur.get(i++)).PrintTache();
+		(this.tachesChauffeur.get(i++)).PrintTache();
+	}
+	
+	public void TypeDeService(Tache t){
+		int heure=t.getHeureDepart();
+		if (heure >= 300 && heure <= 419)	
+			this.typeService=1;				//Service du matin, numŽrotation: 1
+		else if (heure >= 420 && heure <= 1019)
+			this.typeService=2;				//Service du jour, numŽrotation: 2
+		else if (heure >= 1020 && heure <= 1199)
+			this.typeService=3;				//Service du soir, numŽrotation: 3
+		else if (heure >= 1200 && heure <= 1440)
+			this.typeService=4;				//Service de nuit, numŽrotation: 4
+	}
+	
+	public Tache getTache(int i){
+		return this.tachesChauffeur.get(i);
 	}
 	
 	public int getNumeroChauffeur() {
 		return numeroChauffeur;
 	}
-	public String getTypeService() {
+	public int getTypeService() {
 		return typeService;
 	}
 	public ArrayList<Tache> getTachesChauffeur() {
 		return tachesChauffeur;
 	}
-	public void setTypeService(String typeService) {
+	public void setTypeService(int typeService) {
 		this.typeService = typeService;
 	}
 	public void setTachesChauffeur(ArrayList<Tache> tachesChauffeur) {
@@ -90,4 +112,14 @@ public class Chauffeur {
 	public void setCost(int cost) {
 		this.cost = cost;
 	}
+
+	public int getOverTime() {
+		return overTime;
+	}
+
+	public void setOverTime(int overTime) {
+		this.overTime = overTime;
+	}
+	
+	
 }
