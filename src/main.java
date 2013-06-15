@@ -6,7 +6,9 @@ public class main {
    */
   public static void main(String[] args) {
     
-    
+     //はたし　アンツオイネ　です。
+
+
     System.out.println("Résultat de la lecture du fichier:");
     
     Fichier newInstance = new Fichier();
