@@ -8,8 +8,9 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="library" name="jcommon-1.0.16" level="project" />
-    <orderEntry type="library" name="swt" level="project" />
+    <orderEntry type="library" exported="" name="jfree" level="project" />
+    <orderEntry type="library" name="jfree" level="application" />
+    <orderEntry type="library" name="com.kryshchuk.maven.plugins:jfreechart-maven-plugin:1.1.4" level="project" />
   </component>
 </module>
 
