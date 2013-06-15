@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 public class Fichier {
 	
-	protected static ArrayList<Tache> Taches = new ArrayList<Tache>();
+	private ArrayList<Tache> Taches = new ArrayList<Tache>();
 	
 	
 	/* A effacer
@@ -16,14 +16,14 @@ public class Fichier {
 	}
 	*/
 	
-	public static void LectureInstance(){
+	public  void LectureInstance(){
 		int i=1, a, b;
 		String A, B; 
 			try {
 				FileInputStream fstream = new FileInputStream("Instance_1.txt");
 				DataInputStream in = new DataInputStream(fstream);
 				BufferedReader br = new BufferedReader(new InputStreamReader(in));
-				String strLine, c;
+				String strLine;
 				
 				while((strLine = br.readLine()) != null){
 					
@@ -48,11 +48,24 @@ public class Fichier {
 			}
 			
 		}
-	public static void PrintArray(){
-		for (int i=0; i<Taches.size(); i++){
-			(Taches.get(i)).PrintTache();
+	public  void PrintArray(){
+		for (int i=0; i<this.Taches.size(); i++){
+			(this.Taches.get(i)).PrintTache();
 		}
 	}
+	 
+	public Tache getTache(int i){
+		return this.Taches.get(i);
+	}
+	
+	public  ArrayList<Tache> getTaches() {
+		return Taches;
+	}
+	public  void setTaches(ArrayList<Tache> taches) {
+		Taches = taches;
+	}
+	
+	
 }
 
 

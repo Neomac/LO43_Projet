@@ -7,6 +7,7 @@ public class Chauffeur {
 	private int numeroChauffeur;
 	private int workerTimeSum;
 	private	int underTime;
+	private int overTime;
 	private int idleTime;
 	private int cost;
 	private ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();
@@ -16,6 +17,7 @@ public class Chauffeur {
 		numeroChauffeur=0;
 		workerTimeSum=0;
 		underTime=0;
+		overTime=0;
 		idleTime=0;
 		cost=0;
 	}
@@ -32,13 +34,16 @@ public class Chauffeur {
 		tachesChauffeur.add(T);
 	}
 	
-	public void PrintChauffeur(){
+	public void PrintChauffeur(Solution solution){
 		int i;
 		System.out.println("----Worker "+getNumeroChauffeur()+"'s task(s)----");
 		System.out.println();
 		System.out.println("Type de service: "+this.getTypeService());				//Ligne en plus par rapport au fichiers solution
 		System.out.println("WorkerTimeSum="+this.getWorkerTimeSum());
-		System.out.println("UnderTime = "+this.getUnderTime());
+		if (this.getWorkerTimeSum()<solution.getDureeLegale())
+			System.out.println("UnderTime = "+this.getUnderTime());
+		else
+			System.out.println("OverTime = "+this.getOverTime());
 		System.out.println("IdleTime = "+this.getIdleTime());
 		System.out.println("Cost="+this.getCost());
 		for (i=0; i<(this.tachesChauffeur.size())-1; i++){
@@ -107,4 +112,14 @@ public class Chauffeur {
 	public void setCost(int cost) {
 		this.cost = cost;
 	}
+
+	public int getOverTime() {
+		return overTime;
+	}
+
+	public void setOverTime(int overTime) {
+		this.overTime = overTime;
+	}
+	
+	
 }
