@@ -28,9 +28,5 @@ public class FenetreChauffeur extends JFrame {
 		    JTable tableau = new JTable(data, title);
 		    this.getContentPane().add(new JScrollPane(tableau));
     }
-		 
-		  public static void main(String[] args){
-		    FenetreChauffeur fen = new FenetreChauffeur();
-		    fen.setVisible(true);
-		  } //Test commit
+
 }
