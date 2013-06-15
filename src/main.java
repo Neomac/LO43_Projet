@@ -21,6 +21,8 @@ public class main {
     testSolution.PrintSolution();
     Fenetre2 affiche = new Fenetre2();
     
+    //Testing!!!!!!
+    
     System.out.println();
     
     //String fichierConfiguration="Fichier_Configuration.txt";
