@@ -15,7 +15,7 @@ public class FenetreChauffeur extends JFrame {
             Solution testSolution = new Solution();
             testSolution.LectureSolution(fichierSolution);
 		 
-		    //Les données du tableau
+		    //Les donné<es du tableau
 		    String[][] data = new String[testSolution.getChauffeurs().size()][2];
 
             for (int i = 0; i < testSolution.getChauffeurs().size(); i++){
