@@ -23,7 +23,7 @@ public class DiagGantt /*extends ApplicationFrame*/ {
         //super(title);
 
         final IntervalCategoryDataset dataset = createDataset();
-        final JFreeChart chart = createChart(dataset);//
+        final JFreeChart chart = createChart(dataset);// /
 
         // add the chart to a panel...
         final ChartPanel chartPanel = new ChartPanel(chart);
