@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="jfree">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/libs/jcommon-1.0.16/source" />
+      <root url="file://$PROJECT_DIR$/libs/jfreechart-1.0.14/swt" />
+      <root url="file://$PROJECT_DIR$/libs/jfreechart-1.0.14/tests" />
+      <root url="file://$PROJECT_DIR$/libs/jfreechart-1.0.14/source" />
+      <root url="file://$PROJECT_DIR$/libs/jfreechart-1.0.14/experimental" />
+    </SOURCES>
+  </library>
+</component>
