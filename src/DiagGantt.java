@@ -1,3 +1,7 @@
+import java.awt.*;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -6,6 +10,7 @@ import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.time.SimpleTimePeriod;
+import org.jfree.ui.ApplicationFrame;
 
 import javax.swing.*;
 import java.util.Calendar;
@@ -20,15 +25,12 @@ public class DiagGantt /*extends ApplicationFrame*/ {
 
     public DiagGantt(final String title) {
 
-        //super(title);
-
         final IntervalCategoryDataset dataset = createDataset();
         final JFreeChart chart = createChart(dataset);// //
 
         // add the chart to a panel...
         final ChartPanel chartPanel = new ChartPanel(chart);
-        //chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        //setContentPane(chartPanel);
+
 
     }
 
@@ -83,14 +85,6 @@ public class DiagGantt /*extends ApplicationFrame*/ {
         );
 
         return chart;
-    }
-
-    public static void main(final String[] args) {
-
-        //final DiagGantt demo = new DiagGantt("Diagramme de Gantt des Chauffeurs");
-        //demo.pack();
-        //demo.setVisible(true);
-
     }
 
 }
