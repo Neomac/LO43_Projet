@@ -20,13 +20,12 @@ public class Fichier {
 		int i=1, a, b;
 		String A, B; 
 			try {
-				FileInputStream fstream = new FileInputStream("Instance_1.txt");
+				FileInputStream fstream = new FileInputStream("Instance_3.txt");
 				DataInputStream in = new DataInputStream(fstream);
 				BufferedReader br = new BufferedReader(new InputStreamReader(in));
 				String strLine;
 				
 				while((strLine = br.readLine()) != null){
-					
 					StringTokenizer st = new StringTokenizer(strLine, " ");
 					
 					a=Integer.parseInt(st.nextToken());
@@ -46,8 +45,8 @@ public class Fichier {
 				// TODO: handle exception
 				System.out.println("Erreur de lecture du fichier !!!");
 			}
-			
 		}
+	
 	public  void PrintArray(){
 		for (int i=0; i<this.Taches.size(); i++){
 			(this.Taches.get(i)).PrintTache();

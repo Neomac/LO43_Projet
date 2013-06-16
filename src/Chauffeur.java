@@ -36,7 +36,7 @@ public class Chauffeur {
 		this.AjouterTacheChauffeur(fichierInstance.getTacheFichier(indexTache));
 		this.setWorkerTimeSum(this.getWorkerTimeSum()+(fichierInstance.getTacheFichier(indexTache)).getHeureArrivee()-(fichierInstance.getTacheFichier(indexTache)).getHeureDepart());
 		if(this.getTachesChauffeur().size()>1)
-			this.setIdleTime((fichierInstance.getTacheFichier(indexTache)).getHeureDepart()-(this.getTache((this.getTachesChauffeur()).size()-1)).getHeureArrivee());
+			this.setIdleTime(this.getIdleTime()+(fichierInstance.getTacheFichier(indexTache)).getHeureDepart()-(this.getTache((this.getTachesChauffeur()).size()-2)).getHeureArrivee());
 		(fichierInstance.getTaches()).remove(indexTache);
 	}
 	
@@ -46,7 +46,7 @@ public class Chauffeur {
 		if(differenceTemps>=0)
 			this.underTime=differenceTemps;
 		else
-			this.overTime=differenceTemps;
+			this.overTime=(-1)*differenceTemps;
 		if(this.nombrePause!=0)
 			this.idleTime=this.idleTime-solution.getDureePauseLegale()-(this.nombrePause-1)*solution.getDureePauseSecondaire();
 		if(this.underTime!=0)
@@ -63,7 +63,7 @@ public class Chauffeur {
 		int i;
 		System.out.println("----Worker "+getNumeroChauffeur()+"'s task(s)----");
 		System.out.println();
-		System.out.println("Type de service: "+this.getTypeService());				//Ligne en plus par rapport au fichiers solution
+		System.out.println("Type de service: "+this.PrintService());				//Ligne en plus par rapport au fichiers solution
 		System.out.println("WorkerTimeSum="+this.getWorkerTimeSum());
 		if (this.getWorkerTimeSum()<=solution.getDureeLegale())
 			System.out.println("UnderTime = "+this.getUnderTime());
