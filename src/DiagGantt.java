@@ -14,7 +14,7 @@ import org.jfree.data.time.SimpleTimePeriod;
 import javax.swing.*;
 
 
-public class DiagGantt /*extends ApplicationFrame*/ {
+public class DiagGantt {
 
     public DiagGantt(){
         DiagGantt test = new DiagGantt();
