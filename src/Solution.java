@@ -20,7 +20,7 @@ public class Solution {
 	private int dureePauseLegale;
 	private int dureeLegale;
 	private int dureeMaximale;
-	private int nombreTaches;
+	private int totalTaches;
 	protected static ArrayList<Chauffeur> chauffeurs = new ArrayList<Chauffeur>();
 	
 
@@ -33,7 +33,7 @@ public class Solution {
 		dureePauseLegale=30;		//Valeur par défaut
 		dureeLegale=480;			//Valeur par défaut
 		dureeMaximale=600;			//Valeur par défaut
-		nombreTaches=0;
+		totalTaches=0;
 	}
 	
 	public void LectureConfiguration(String fichierConfiguration){
@@ -129,7 +129,7 @@ public class Solution {
 				st = new StringTokenizer(strLine, " ");
 				
 				while(marker1==0){
-					this.nombreTaches++;
+					this.totalTaches++;
 					st = new StringTokenizer(strLine, "\t");
 					c=st.nextToken();
 					numero=Integer.parseInt(c.substring(5));
@@ -227,7 +227,7 @@ public class Solution {
 	}
 	
 	public void PrintSolution(){
-		System.out.println("**********The solution contains "+this.getNombreChauffeurs()+" driver(s) and "+this.getNombreTaches()+" tasks.**********");
+		System.out.println("**********The solution contains "+this.getNombreChauffeurs()+" driver(s) and "+this.getTotalTaches()+" tasks.**********");
 		for (int i=0; i<this.chauffeurs.size(); i++){
 			(this.chauffeurs.get(i)).PrintChauffeur(this);
 		}
@@ -375,12 +375,12 @@ public class Solution {
 		this.dureeMaximale = dureeMaximale;
 	}
 
-	public int getNombreTaches() {
-		return nombreTaches;
+	public int getTotalTaches() {
+		return totalTaches;
 	}
 
-	public void setNombreTaches(int nombreTaches) {
-		this.nombreTaches = nombreTaches;
+	public void setTotalTaches(int totalTaches) {
+		this.totalTaches = totalTaches;
 	}
 
 	public int getTotalOverTime() {

@@ -87,6 +87,10 @@ public class Chauffeur {
 		return this.tachesChauffeur.get(i);
 	}
 	
+	public int getNombreTaches(){
+		return this.tachesChauffeur.size();
+	}
+	
 	public int getNumeroChauffeur() {
 		return numeroChauffeur;
 	}
