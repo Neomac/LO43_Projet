@@ -10,7 +10,7 @@ public class Chauffeur {
 	private int overTime;
 	private int idleTime;
 	private int cost;
-	private int[] heurePause = {0,0,0,0,0,0,0,0,0,0};
+	private int nombrePause;
 	private ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();
 
 	public Chauffeur(){
@@ -21,6 +21,7 @@ public class Chauffeur {
 		overTime=0;
 		idleTime=0;
 		cost=0;
+		nombrePause=0;
 	}
 	
 	public Chauffeur(int _numeroChauffeur, int _workerTimeSum, int _underTime, int _idleTime, int _cost){
@@ -31,12 +32,31 @@ public class Chauffeur {
 		cost=_cost;
 	}
 	
-	public void AjouterTacheChauffeur(Tache T){
-		this.tachesChauffeur.add(T);
+	public void ajouterTache(Fichier fichierInstance, int indexTache){ //Ajoute la tache numTache du fichier d'instance au chauffeur c et calcul workerTimeSum et idleTime
+		this.AjouterTacheChauffeur(fichierInstance.getTacheFichier(indexTache));
+		this.setWorkerTimeSum(this.getWorkerTimeSum()+(fichierInstance.getTacheFichier(indexTache)).getHeureArrivee()-(fichierInstance.getTacheFichier(indexTache)).getHeureDepart());
+		if(this.getTachesChauffeur().size()>1)
+			this.setIdleTime((fichierInstance.getTacheFichier(indexTache)).getHeureDepart()-(this.getTache((this.getTachesChauffeur()).size()-1)).getHeureArrivee());
+		(fichierInstance.getTaches()).remove(indexTache);
 	}
 	
-	public void AjouterHeurePause(Integer heure){
-		
+	public void CalculerCout(Solution solution){
+		int differenceTemps;
+		differenceTemps=solution.getDureeLegale()-this.workerTimeSum;
+		if(differenceTemps>=0)
+			this.underTime=differenceTemps;
+		else
+			this.overTime=differenceTemps;
+		if(this.nombrePause!=0)
+			this.idleTime=this.idleTime-solution.getDureePauseLegale()-(this.nombrePause-1)*solution.getDureePauseSecondaire();
+		if(this.underTime!=0)
+			this.cost=this.underTime+this.idleTime;
+		else
+			this.cost=this.overTime+this.idleTime;
+	}
+	
+	public void AjouterTacheChauffeur(Tache T){
+		this.tachesChauffeur.add(T);
 	}
 	
 	public void PrintChauffeur(Solution solution){
@@ -45,11 +65,12 @@ public class Chauffeur {
 		System.out.println();
 		System.out.println("Type de service: "+this.getTypeService());				//Ligne en plus par rapport au fichiers solution
 		System.out.println("WorkerTimeSum="+this.getWorkerTimeSum());
-		if (this.getWorkerTimeSum()<solution.getDureeLegale())
+		if (this.getWorkerTimeSum()<=solution.getDureeLegale())
 			System.out.println("UnderTime = "+this.getUnderTime());
 		else
 			System.out.println("OverTime = "+this.getOverTime());
 		System.out.println("IdleTime = "+this.getIdleTime());
+		System.out.println("Nombre de pauses = "+this.getNombrePause());
 		System.out.println("Cost="+this.getCost());
 		for (i=0; i<(this.tachesChauffeur.size())-1; i++){
 			(this.tachesChauffeur.get(i)).PrintTache();
@@ -143,12 +164,12 @@ public class Chauffeur {
 		this.overTime = overTime;
 	}
 
-	public int getHeurePause(int i) {
-		return heurePause[i];
+	public int getNombrePause() {
+		return nombrePause;
 	}
 
-	public void setHeurePause(int[] heurePause) {
-		this.heurePause = heurePause;
+	public void setNombrePause(int _nombrePause) {
+		this.nombrePause = _nombrePause;
 	}
 	
 }
