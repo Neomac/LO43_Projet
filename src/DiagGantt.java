@@ -1,28 +1,16 @@
-/**
- * Created with IntelliJ IDEA.
- * User: HP-Touchpad
- * Date: 15/06/13
- * Time: 19:20
- * To change this template use File | Settings | File Templates.
- */
-
 import java.awt.*;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.plot.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.DateAxis;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.time.SimpleTimePeriod;
 import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.RefineryUtilities;
 
 public class DiagGantt extends ApplicationFrame {
 
@@ -52,7 +40,7 @@ public class DiagGantt extends ApplicationFrame {
         for (int i = 0; i < testSolution.getChauffeurs().size(); i++){
             final TaskSeries tempTask = new TaskSeries("Chauffeur numero " + Integer.toString(testSolution.getChauffeurs().get(i).getNumeroChauffeur())); // Création d'une serie de tache
             for (int j =1; j < testSolution.getChauffeurs().get(i).getTachesChauffeur().size(); j++){
-               tempTask.add(new Task("Tache numero " + Integer.toString(testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getNumeroTache()), new SimpleTimePeriod(testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureDepart()*1000*60 /*Passage en minutes*/, testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureArrivee()*1000*60 /* Passage en minutes*/))); // Ajout de la tache a la serie de tache
+               tempTask.add(new Task("",new SimpleTimePeriod(testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureDepart()*1000*60 /*Passage en minutes*/, testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureArrivee()*1000*60 /* Passage en minutes*/))); // Ajout de la tache a la serie de tache
             }
             final TaskSeriesCollection tempCol = new TaskSeriesCollection(); // Création de la collection
             collection.add(tempTask); // Ajout de la serie de tache a la collection

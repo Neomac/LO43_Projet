@@ -115,7 +115,10 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		Chauffeur_cb = new JComboBox();
 		Chauffeur_cb.addItem("0");
 		TextSolution = ZoneTexte_c.CreerCadre_scrollpane("Affichage de la solution", 200, 400);
-		
+
+        // Ajout du Diagramme de Gantt
+        final DiagGantt diag = new DiagGantt("Diagramme de Gantt des Chauffeurs");
+        diag.pack();
 		DiagGantt.add(Diagramme);
 		
 		Onglet1.setLayout(new GridLayout(3,2));
