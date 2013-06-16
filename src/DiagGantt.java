@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,11 +9,10 @@ import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.time.SimpleTimePeriod;
-import org.jfree.ui.ApplicationFrame;
+
 
 import javax.swing.*;
-import java.util.Calendar;
-import java.util.Date;
+
 
 public class DiagGantt /*extends ApplicationFrame*/ {
 
