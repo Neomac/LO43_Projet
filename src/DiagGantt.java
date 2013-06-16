@@ -1,7 +1,3 @@
-import java.awt.*;
-import java.util.Calendar;
-import java.util.Date;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -10,22 +6,39 @@ import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.time.SimpleTimePeriod;
-import org.jfree.ui.ApplicationFrame;
 
-public class DiagGantt extends ApplicationFrame {
+import javax.swing.*;
+import java.util.Calendar;
+import java.util.Date;
+
+public class DiagGantt /*extends ApplicationFrame*/ {
+
+    public DiagGantt(){
+        DiagGantt test = new DiagGantt();
+        test.creationChart();
+    }
 
     public DiagGantt(final String title) {
 
-        super(title);
+        //super(title);
 
         final IntervalCategoryDataset dataset = createDataset();
         final JFreeChart chart = createChart(dataset);
 
         // add the chart to a panel...
         final ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        setContentPane(chartPanel);
+        //chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        //setContentPane(chartPanel);
 
+    }
+
+    public JPanel creationChart(){
+        JPanel PanelChart = new JPanel();
+        final IntervalCategoryDataset dataset = createDataset();
+        final JFreeChart chart = createChart(dataset);
+        ChartPanel ChartP = new ChartPanel(chart);
+        PanelChart.add(ChartP);
+        return PanelChart;
     }
 
     public static IntervalCategoryDataset createDataset() {
@@ -64,7 +77,7 @@ public class DiagGantt extends ApplicationFrame {
                 "Chauffeurs",              // domain axis label
                 "Heures",              // range axis label
                 dataset,             // data
-                true,                // include legend
+                false,                // include legend
                 true,                // tooltips
                 false                // urls
         );
@@ -74,9 +87,9 @@ public class DiagGantt extends ApplicationFrame {
 
     public static void main(final String[] args) {
 
-        final DiagGantt demo = new DiagGantt("Diagramme de Gantt des Chauffeurs");
-        demo.pack();
-        demo.setVisible(true);
+        //final DiagGantt demo = new DiagGantt("Diagramme de Gantt des Chauffeurs");
+        //demo.pack();
+        //demo.setVisible(true);
 
     }
 

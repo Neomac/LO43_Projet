@@ -9,7 +9,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="library" exported="" name="jfree" level="project" />
-    <orderEntry type="library" name="jfree" level="application" />
+    <orderEntry type="library" exported="" name="jfree" level="application" />
     <orderEntry type="library" exported="" name="com.kryshchuk.maven.plugins:jfreechart-maven-plugin:1.1.4" level="project" />
   </component>
 </module>

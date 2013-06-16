@@ -1,21 +1,9 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTabbedPane;
-import javax.swing.border.Border;
 
 public class OuvrirFichier extends JFrame implements ActionListener {
 	private JFileChooser OpenFile;
@@ -58,6 +46,9 @@ public class OuvrirFichier extends JFrame implements ActionListener {
         JPanel CoutTotal_p = new JPanel();
         JPanel NbTache_p = new JPanel();
         JPanel TypeService_p = new JPanel();
+
+        //Déclaration des panels pour l'onglet 2
+        JPanel DiagGantt_ = new JPanel();
         
         //---------D�claration des panels pour l'onglet 3--------\\
         JPanel TypeService1_p = new JPanel();
@@ -116,10 +107,20 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		Chauffeur_cb.addItem("0");
 		TextSolution = ZoneTexte_c.CreerCadre_scrollpane("Affichage de la solution", 200, 400);
 
-        // Ajout du Diagramme de Gantt
-        final DiagGantt diag = new DiagGantt("Diagramme de Gantt des Chauffeurs");
-        diag.pack();
-		DiagGantt.add(Diagramme);
+        JPanel temp = new JPanel();
+        //final DiagGantt demo = new DiagGantt("Diagramme de Gantt des Chauffeurs");
+        DiagGantt chart1 = new DiagGantt("Test");
+        temp = chart1.creationChart();
+        //demo.pack();
+        //demo.setVisible(true);
+        //temp.add(chart1);
+        //IntervalCategoryDataset dataset;
+        //dataset.createDataset();
+        //JFreeChart chart = createChart(dataset);
+        //ChartPanel CP = new ChartPanel(demo);
+
+		//DiagGantt.add(Diagramme);
+        DiagGantt.add(temp);
 		
 		Onglet1.setLayout(new GridLayout(3,2));
 		
