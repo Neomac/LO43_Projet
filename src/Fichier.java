@@ -55,7 +55,7 @@ public class Fichier {
 	}
 
 	 
-	public Tache getTache(int i){
+	public Tache getTacheFichier(int i){
 		return this.Taches.get(i);
 	}
 	

@@ -18,6 +18,7 @@ public class Solution {
 	private int serviceSoir;
 	private int serviceNuit;
 	private int dureePauseLegale;
+	private int dureePauseSecondaire;
 	private int dureeLegale;
 	private int dureeMaximale;
 	private int totalTaches;
@@ -31,6 +32,7 @@ public class Solution {
 		totalUnderTime=0;
 		totalOverTime=0;
 		dureePauseLegale=30;		//Valeur par défaut
+		dureePauseSecondaire=20;
 		dureeLegale=480;			//Valeur par défaut
 		dureeMaximale=600;			//Valeur par défaut
 		totalTaches=0;
@@ -50,6 +52,11 @@ public class Solution {
 			strLine = br.readLine();
 			st = new StringTokenizer(strLine, " ");
 			st.nextToken();
+			this.setDureePauseSecondaire(Integer.parseInt(st.nextToken()));
+			
+			strLine = br.readLine();
+			st = new StringTokenizer(strLine, " ");
+			st.nextToken();
 			this.setDureeLegale(Integer.parseInt(st.nextToken()));
 			
 			strLine = br.readLine();
@@ -58,7 +65,6 @@ public class Solution {
 			this.setDureeMaximale(Integer.parseInt(st.nextToken()));
 			
 		}	catch (Exception e) {
-			// TODO: handle exception
 			System.out.println("Erreur de lecture du fichier de configuration!");
 		}
 	}
@@ -66,6 +72,7 @@ public class Solution {
 	public void PrintConfiguration(){
 		System.out.println("Configuration:");
 		System.out.println("DureePauseLegale= "+this.getDureePauseLegale());
+		System.out.println("DureePauseSecondaire= "+this.getDureePauseSecondaire());
 		System.out.println("DureeLegaleTravail= "+this.getDureeLegale());
 		System.out.println("DureeMaximumTravail= "+this.getDureeMaximale());
 	}
@@ -165,29 +172,51 @@ public class Solution {
 			in.close();
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println("Erreur de lecture du fichier solution!");
 		}
 	}
 	
 	public void GenerationSolution(Fichier fichierInstance){
-		int i=0, j=1, pause=0, marqueurArret=0, marqueurChoix=0;
+		int i=0, j=0, pause=0, marqueurArret=0, marqueurChoix=0;
 		
 		while(!((fichierInstance.getTaches()).isEmpty())){
 			i++;
+			j=1;
 			Chauffeur nouveauChauffeur = new Chauffeur();
 			nouveauChauffeur.setNumeroChauffeur(i);
-			while(nouveauChauffeur.getWorkerTimeSum()<this.getDureeLegale() && marqueurArret==0){
-				pause=nouveauChauffeur.getHeurePause(0);
-				while(nouveauChauffeur.getHeurePause(j+1)!=0){
-					pause=nouveauChauffeur.getHeurePause(j);
-					j++;
+			this.setNombreChauffeurs(i);
+			marqueurArret=0;
+			//System.out.println("Numero Chauffeur "+i+" temps de travail "+nouveauChauffeur.getWorkerTimeSum()+" duree legale "+this.getDureeLegale()+" marqueurArret "+marqueurArret+" nombre de taches restantes "+fichierInstance.getTaches().size());
+			while(((nouveauChauffeur.getWorkerTimeSum())<(this.getDureeLegale())) && marqueurArret==0){
+				//System.out.println("\tNumero tache "+j);
+				j++;
+				pause=nouveauChauffeur.getNombrePause();
+				if((nouveauChauffeur.getWorkerTimeSum())>(240+240*pause)){
+					if(nouveauChauffeur.getNombrePause()==0){
+						marqueurChoix=ChoisirProchaineTache(nouveauChauffeur, fichierInstance, this.getDureePauseLegale());
+						nouveauChauffeur.setNombrePause(nouveauChauffeur.getNombrePause()+1);
+					}
+					else{
+						marqueurChoix=ChoisirProchaineTache(nouveauChauffeur, fichierInstance, this.getDureePauseSecondaire());
+						nouveauChauffeur.setNombrePause(nouveauChauffeur.getNombrePause()+1);
+					}
 				}
-				if((nouveauChauffeur.getWorkerTimeSum()-pause)>240){
-					//if()
+				else{
+					marqueurChoix=ChoisirProchaineTache(nouveauChauffeur, fichierInstance, 0);
+				}
+				
+				if(marqueurChoix!=0){
+					nouveauChauffeur.ajouterTache(fichierInstance, marqueurChoix-1);
+				}
+				else{
+					marqueurArret=1;
+					this.TypeService(nouveauChauffeur);
+					this.chauffeurs.add(nouveauChauffeur);
+					nouveauChauffeur.CalculerCout(this);
 				}
 			}
 		}
+		this.CalculerCoutTotal();
 	}
 	
 	public int ChoisirProchaineTache(Chauffeur c, Fichier fichierInstance, int dureePause){
@@ -196,34 +225,46 @@ public class Solution {
 		indexTacheChoisie=heureTacheChoisie=heureTachePrecedente=0;
 		
 		if ((c.getTachesChauffeur()).isEmpty()){	//Si ceci est la première tache de la journée du chauffeur on prend la première tache disponible
-			heureTacheChoisie=(fichierInstance.getTache(0)).getHeureDepart();
+			//System.out.println("Test 1");
+			heureTacheChoisie=(fichierInstance.getTacheFichier(0)).getHeureDepart();
 			heureTachePrecedente=0;
+			indexTacheChoisie=1;
 			for (int i=1; i<(fichierInstance.getTaches().size()); i++){
-				if(heureTacheChoisie>(fichierInstance.getTache(i)).getHeureDepart()){
-					indexTacheChoisie=i;
-					heureTacheChoisie=(fichierInstance.getTache(i)).getHeureDepart();
+				//System.out.println("Test 1.1");
+				if(heureTacheChoisie>(fichierInstance.getTacheFichier(i)).getHeureDepart()){
+					//System.out.println("Test 1.2");
+					indexTacheChoisie=i+1;
+					heureTacheChoisie=(fichierInstance.getTacheFichier(i)).getHeureDepart();
 				}
 			}
+			c.TypeDeService(fichierInstance.getTacheFichier(indexTacheChoisie-1));
 		}
 		else{
-			heureTachePrecedente=(c.getTache((c.getTachesChauffeur()).size())).getHeureArrivee();
-			lieuTachePrecedente=(c.getTache((c.getTachesChauffeur()).size())).getLieuDepart();
+			//System.out.println("Test 2");
+			heureTachePrecedente=(c.getTache((c.getTachesChauffeur()).size()-1)).getHeureArrivee();
+			lieuTachePrecedente=(c.getTache((c.getTachesChauffeur()).size()-1)).getLieuDepart();
 			heureTacheChoisie=1500;
 			for (int i=0; i<(fichierInstance.getTaches().size()); i++){
-				if(lieuTachePrecedente==(fichierInstance.getTache(i)).getLieuDepart() && heureTacheChoisie>(fichierInstance.getTache(i)).getHeureDepart() && (fichierInstance.getTache(i)).getHeureDepart()-heureTachePrecedente>dureePause){
-					indexTacheChoisie=i;
-					heureTacheChoisie=(fichierInstance.getTache(i)).getHeureDepart();
+				//System.out.println("Test 2.1");
+				if(lieuTachePrecedente==(fichierInstance.getTacheFichier(i)).getLieuDepart() && heureTacheChoisie>(fichierInstance.getTacheFichier(i)).getHeureDepart() && (fichierInstance.getTacheFichier(i)).getHeureDepart()-heureTachePrecedente>dureePause){
+					//System.out.println("Test 2.2");
+					indexTacheChoisie=i+1;
+					heureTacheChoisie=(fichierInstance.getTacheFichier(i)).getHeureDepart();
 				}
 			}
 		}
+		//System.out.println("\t\tTache choisie "+indexTacheChoisie);
 		return indexTacheChoisie;
 	}
 	
-	public void ajouterTache(Chauffeur c, Fichier fichierInstance, int indexTache){ //Ajoute la tache numTache du fichier d'instance au chauffeur c et calcul workerTimeSum et idleTime
-		c.AjouterTacheChauffeur(fichierInstance.getTache(indexTache));
-		c.setWorkerTimeSum(c.getWorkerTimeSum()+(fichierInstance.getTache(indexTache)).getHeureArrivee()-(fichierInstance.getTache(indexTache)).getHeureDepart());
-		c.setIdleTime((fichierInstance.getTache(indexTache)).getHeureDepart()-(c.getTache((c.getTachesChauffeur()).size())).getHeureArrivee());
-		(fichierInstance.getTaches()).remove(indexTache);
+	public void CalculerCoutTotal(){
+		for(int i=0; i<this.chauffeurs.size();i++){
+			this.coutTotal+=(this.getChauffeur(i)).getCost();
+			this.totalIdleTime+=(this.getChauffeur(i)).getIdleTime();
+			this.totalOverTime+=(this.getChauffeur(i)).getOverTime();
+			this.totalUnderTime+=(this.getChauffeur(i)).getUnderTime();
+			this.totalTaches+=(this.getChauffeur(i)).getNombreTaches();
+		}
 	}
 	
 	public void PrintSolution(){
@@ -389,6 +430,14 @@ public class Solution {
 
 	public void setTotalOverTime(int totalOverTime) {
 		this.totalOverTime = totalOverTime;
+	}
+
+	public int getDureePauseSecondaire() {
+		return dureePauseSecondaire;
+	}
+
+	public void setDureePauseSecondaire(int dureePauseSecondaire) {
+		this.dureePauseSecondaire = dureePauseSecondaire;
 	}
 	
 	
