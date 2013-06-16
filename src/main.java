@@ -22,7 +22,7 @@ public class main {
     testSolution.LectureSolution(fichierSolution);
     testSolution.PrintSolution();
     //Fenetre2 affiche = new Fenetre2();
-    //OuvrirFichier test = new OuvrirFichier();
+    OuvrirFichier test = new OuvrirFichier();
     
     //Testing!!!!!!
     
