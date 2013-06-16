@@ -10,7 +10,7 @@ public class Chauffeur {
 	private int overTime;
 	private int idleTime;
 	private int cost;
-	private int[] heurePause = new int[10];
+	private int[] heurePause = {0,0,0,0,0,0,0,0,0,0};
 	private ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();
 
 	public Chauffeur(){
@@ -139,8 +139,8 @@ public class Chauffeur {
 		this.overTime = overTime;
 	}
 
-	public int[] getHeurePause() {
-		return heurePause;
+	public int getHeurePause(int i) {
+		return heurePause[i];
 	}
 
 	public void setHeurePause(int[] heurePause) {

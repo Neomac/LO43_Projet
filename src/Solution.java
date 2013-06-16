@@ -171,14 +171,21 @@ public class Solution {
 	}
 	
 	public void GenerationSolution(Fichier fichierInstance){
-		int i=0, marqueurArret=0, marqueurChoix=0;
+		int i=0, j=1, pause=0, marqueurArret=0, marqueurChoix=0;
 		
 		while(!((fichierInstance.getTaches()).isEmpty())){
 			i++;
 			Chauffeur nouveauChauffeur = new Chauffeur();
 			nouveauChauffeur.setNumeroChauffeur(i);
 			while(nouveauChauffeur.getWorkerTimeSum()<this.getDureeLegale() && marqueurArret==0){
-				
+				pause=nouveauChauffeur.getHeurePause(0);
+				while(nouveauChauffeur.getHeurePause(j+1)!=0){
+					pause=nouveauChauffeur.getHeurePause(j);
+					j++;
+				}
+				if((nouveauChauffeur.getWorkerTimeSum()-pause)>240){
+					//if()
+				}
 			}
 		}
 	}
