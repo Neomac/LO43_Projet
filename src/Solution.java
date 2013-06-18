@@ -324,6 +324,10 @@ public class Solution {
 		this.chauffeurs.clear();
 	}
 	
+	public String GetHoraire(int minutes){
+		String resultat;
+		return resultat=((minutes)%60)+" heures "+(minutes-((minutes)%60)*60)+" minutes";
+	}
 	
 	public Chauffeur getChauffeur(int i){
 		return chauffeurs.get(i);
