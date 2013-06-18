@@ -408,7 +408,7 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 			    }
 		else{
 			ZoneTexte_c.getTexte().append("Erreur d'ouverture du fichier\n");
-			//ZoneTexte_c.getTexte().setText("");
+			//ZoneTexte_c.getTexte().setText(""); t
 		}
 		//Interraction avec la combo Box
         //NbTache_c.getTexte().append(" " +testSolution.getChauffeur(Integer.parseInt((String)Chauffeur_cb.getSelectedItem())).getCost());
