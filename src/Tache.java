@@ -25,14 +25,18 @@ public class Tache {
 		System.out.println("Task:"+getNumeroTache()+"\tstartTime:"+getHeureDepart()+"\tfinishTime:"+getHeureArrivee()+getLieuDepart()+getLieuArrivee());
 	}
 	
+	public String StringTache(){
+		return "Task:"+getNumeroTache()+"\tstartTime:"+getHeureDepart()+"\tfinishTime:"+getHeureArrivee()+getLieuDepart()+getLieuArrivee()+"\n";
+	}
+	
 	public String HeureDepartTache(){
-		String resultat;
-		return resultat=((this.HeureDepart)%60)+" heures "+(this.HeureDepart-((this.HeureDepart)%60)*60)+" minutes";
+		String resultat=((this.HeureDepart)%60)+" heures "+(this.HeureDepart-((this.HeureDepart)%60)*60)+" minutes";
+		return resultat;
 	}
 	
 	public String HeureArriveeTache(){
-		String resultat;
-		return resultat=((this.HeureArrivee)%60)+" heures "+(this.HeureArrivee-((this.HeureArrivee)%60)*60)+" minutes";
+		String resultat=((this.HeureArrivee)%60)+" heures "+(this.HeureArrivee-((this.HeureArrivee)%60)*60)+" minutes";
+		return resultat;
 	}
 	
 	public int getNumeroTache() {

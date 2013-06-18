@@ -85,6 +85,7 @@ public class Solution {
 		int numero, heureDepart, heureArrivee, i=0, marker1=0, marker2=0;
 		String lieuDepart, lieuArrivee;
 		this.ReinitialiserSolution();
+		
 		try {
 			FileInputStream fstream = new FileInputStream(fichierSolution);
 			DataInputStream in = new DataInputStream(fstream);
@@ -287,6 +288,24 @@ public class Solution {
 		System.out.println("Services du jour: "+this.getServiceJour());			//Ligne en plus par rapport au fichiers solution
 		System.out.println("Services du soir: "+this.getServiceSoir());			//Ligne en plus par rapport au fichiers solution
 		System.out.println("Services de nuit : "+this.getServiceNuit());		//Ligne en plus par rapport au fichiers solution
+	}
+	
+	public String StringSolution(){
+		String resultat="";
+		System.out.println("**********The solution contains "+this.getNombreChauffeurs()+" driver(s) and "+this.getTotalTaches()+" tasks.**********");
+		for (int i=0; i<this.chauffeurs.size(); i++){
+			resultat=resultat+(this.chauffeurs.get(i)).StringChauffeur(this)+"\n";
+		}
+		resultat=resultat+"--------------------------------\n";
+		resultat=resultat+"\n";
+		resultat=resultat+"TotalCost="+this.getCoutTotal()+"\n";
+		resultat=resultat+"TotalUnderTime="+this.getUnderTime()+"\n";
+		resultat=resultat+"TotalIdleTime="+this.getIdleTime()+"\n";
+		resultat=resultat+"Services du matin: "+this.getServiceMatin()+"\n";
+		resultat=resultat+"Services du jour: "+this.getServiceJour()+"\n";
+		resultat=resultat+"Services du soir: "+this.getServiceSoir()+"\n";
+		resultat=resultat+"Services de nuit : "+this.getServiceNuit()+"\n";
+		return resultat;
 	}
 	
 	public void TypeService(Chauffeur c){

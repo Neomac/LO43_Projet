@@ -34,7 +34,10 @@ public class Chauffeur {
 	
 	public void ajouterTache(Fichier fichierInstance, int indexTache){ //Ajoute la tache numTache du fichier d'instance au chauffeur c et calcul workerTimeSum et idleTime
 		this.AjouterTacheChauffeur(fichierInstance.getTacheFichier(indexTache));
-		this.setWorkerTimeSum(this.getWorkerTimeSum()+(fichierInstance.getTacheFichier(indexTache)).getHeureArrivee()-(fichierInstance.getTacheFichier(indexTache)).getHeureDepart());
+		if(this.getWorkerTimeSum()==0)
+			this.setWorkerTimeSum((fichierInstance.getTacheFichier(indexTache)).getHeureArrivee()-(fichierInstance.getTacheFichier(indexTache)).getHeureDepart());
+		else
+			this.setWorkerTimeSum(this.getWorkerTimeSum()+((fichierInstance.getTacheFichier(indexTache)).getHeureArrivee()-(this.getTache(this.getTachesChauffeur().size()-2)).getHeureArrivee()));
 		if(this.getTachesChauffeur().size()>1)
 			this.setIdleTime(this.getIdleTime()+(fichierInstance.getTacheFichier(indexTache)).getHeureDepart()-(this.getTache((this.getTachesChauffeur()).size()-2)).getHeureArrivee());
 		(fichierInstance.getTaches()).remove(indexTache);
@@ -42,6 +45,7 @@ public class Chauffeur {
 	
 	public void CalculerCout(Solution solution){
 		int differenceTemps;
+		//this.workerTimeSum=this.getTache(0).getHeureDepart()+
 		differenceTemps=solution.getDureeLegale()-this.workerTimeSum;
 		if(differenceTemps>=0)
 			this.underTime=differenceTemps;
@@ -79,6 +83,28 @@ public class Chauffeur {
 		(this.tachesChauffeur.get(i++)).PrintTache();
 	}
 	
+	public String StringChauffeur(Solution solution){
+		String resultat="";
+		int i;
+		resultat=resultat+"----Worker "+getNumeroChauffeur()+"'s task(s)----\n";
+		resultat=resultat+"\n";
+		resultat=resultat+"Type de service: "+this.PrintService()+"\n";
+		resultat=resultat+"WorkerTimeSum="+this.getWorkerTimeSum()+"\n";
+		if (this.getWorkerTimeSum()<=solution.getDureeLegale())
+			resultat=resultat+"UnderTime = "+this.getUnderTime()+"\n";
+		else
+			resultat=resultat+"OverTime = "+this.getOverTime()+"\n";
+		resultat=resultat+"IdleTime = "+this.getIdleTime()+"\n";
+		resultat=resultat+"Nombre de pauses = "+this.getNombrePause()+"\n";
+		resultat=resultat+"Cost="+this.getCost()+"\n";
+		for (i=0; i<(this.tachesChauffeur.size())-1; i++){
+			resultat=resultat+(this.tachesChauffeur.get(i)).StringTache();
+			resultat=resultat+"\n";
+		}
+		resultat=resultat+(this.tachesChauffeur.get(i++)).StringTache();
+		return resultat;
+	}
+	
 	public void TypeDeService(Tache t){
 		int heure=t.getHeureDepart();
 		if (heure >= 300 && heure <= 419)	
@@ -102,6 +128,14 @@ public class Chauffeur {
 		else if(this.getTypeService()==4)
 			return result="Service de nuit";
 		return result;
+	}
+	
+	public String getNumerosTaches(){
+		String resultat="";
+		for(int i=0; i<this.tachesChauffeur.size();i++){
+			resultat=resultat+"tache numero: "+(this.getTache(i)).getNumeroTache()+"\n";
+		}
+		return resultat;
 	}
 	
 	public Tache getTache(int i){
