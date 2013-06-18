@@ -27,7 +27,7 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 	
 	public OuvrirFichier(){
 		this.setTitle("Projet LO43");
-		this.setSize(600,600);
+		this.setSize(1200,600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setLocationRelativeTo(null);
 	    this.setVisible(true);
@@ -223,7 +223,8 @@ public class OuvrirFichier extends JFrame implements ActionListener {
                     TexteSimplifie.setSelected(false);
                 }
                 if(marqueur == 1){
-                    ZoneTexte_c.getTexte().setText(" ");
+                    ZoneTexte_c.getTexte().setText("");
+                    ZoneTexte_c.getTexte().append("" + testSolution.StringSolution());
                 }
             }
         });

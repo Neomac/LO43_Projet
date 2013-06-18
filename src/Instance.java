@@ -21,7 +21,7 @@ public class Instance {
 				
 				while((strLine = br.readLine()) != null){
 					StringTokenizer st = new StringTokenizer(strLine, " ");
-					Tache NouvelleTache = new Tache(i, Integer.parseInt(st.nextToken())*60+Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())*60+Integer.parseInt(st.nextToken()), st.nextToken(), st.nextToken());
+					Tache NouvelleTache = new Tache(i,0, Integer.parseInt(st.nextToken())*60+Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())*60+Integer.parseInt(st.nextToken()), st.nextToken(), st.nextToken());
 					this.tachesInstance.add(NouvelleTache);
 					i++;
 				}
