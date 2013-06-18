@@ -18,9 +18,10 @@ public class Fichier {
 	
 	public  void LectureInstance(){
 		int i=1, a, b;
-		String A, B; 
+		String A, B;
+		this.ReinitialiserFichier();
 			try {
-				FileInputStream fstream = new FileInputStream("Instance_3.txt");
+				FileInputStream fstream = new FileInputStream("Instance_1.txt");
 				DataInputStream in = new DataInputStream(fstream);
 				BufferedReader br = new BufferedReader(new InputStreamReader(in));
 				String strLine;
@@ -53,7 +54,10 @@ public class Fichier {
 		}
 	}
 
-	 
+	public void ReinitialiserFichier(){
+		this.Taches.clear();
+	}
+	
 	public Tache getTacheFichier(int i){
 		return this.Taches.get(i);
 	}
