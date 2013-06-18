@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 public class Fichier {
 	
-	private ArrayList<Tache> Taches = new ArrayList<Tache>();
+	private ArrayList<Tache> TachesFichier = new ArrayList<Tache>();
 	
 	
 	/* A effacer
@@ -36,8 +36,8 @@ public class Fichier {
 					A=st.nextToken();
 					B=st.nextToken();
 					
-					Tache NouvelleTache = new Tache(i, a, b, A, B);
-					Taches.add(NouvelleTache);
+					Tache NouvelleTache = new Tache(i, 0, a, b, A, B);
+					TachesFichier.add(NouvelleTache);
 					i++;
 				}
 				in.close();
@@ -49,24 +49,24 @@ public class Fichier {
 		}
 	
 	public  void PrintArray(){
-		for (int i=0; i<this.Taches.size(); i++){
-			(this.Taches.get(i)).PrintTache();
+		for (int i=0; i<this.TachesFichier.size(); i++){
+			(this.TachesFichier.get(i)).PrintTache();
 		}
 	}
 
 	public void ReinitialiserFichier(){
-		this.Taches.clear();
+		this.TachesFichier.clear();
 	}
 	
 	public Tache getTacheFichier(int i){
-		return this.Taches.get(i);
+		return this.TachesFichier.get(i);
 	}
 	
 	public  ArrayList<Tache> getTaches() {
-		return Taches;
+		return TachesFichier;
 	}
 	public  void setTaches(ArrayList<Tache> taches) {
-		Taches = taches;
+		TachesFichier = taches;
 	}
 	
 	

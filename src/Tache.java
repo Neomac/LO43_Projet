@@ -2,6 +2,7 @@
 
 public class Tache {
 	private int numeroTache;
+	private int numeroChauffeur;
 	private int HeureDepart; 	//En minutes
 	private int HeureArrivee;	//En minutes
 	private String LieuDepart;	
@@ -9,12 +10,13 @@ public class Tache {
 	
 
 	public Tache(){
-		HeureDepart = HeureArrivee = 0;
+		numeroChauffeur=HeureDepart = HeureArrivee = 0;
 		LieuDepart = LieuArrivee = "";
 	}
 	
-	public Tache(int _numeroTache, int _heureDepart, int _heureArrivee, String _lieuDepart, String _lieuArrivee) {
+	public Tache(int _numeroTache,int _numeroChauffeur, int _heureDepart, int _heureArrivee, String _lieuDepart, String _lieuArrivee) {
 		numeroTache = _numeroTache;
+		numeroChauffeur = _numeroChauffeur;		//Mettre à 0 si un chauffeur n'est pas attribué
 		HeureDepart = _heureDepart;
 		HeureArrivee = _heureArrivee;
 		LieuDepart = _lieuDepart;
@@ -23,6 +25,10 @@ public class Tache {
 	
 	public void PrintTache(){
 		System.out.println("Task:"+getNumeroTache()+"\tstartTime:"+getHeureDepart()+"\tfinishTime:"+getHeureArrivee()+getLieuDepart()+getLieuArrivee());
+	}
+	
+	public String StringTacheChauffeur(){
+		return "Task:"+getNumeroTache()+"\tChauffeur"+getNumeroChauffeur()+"\tstartTime:"+getHeureDepart()+"\tfinishTime:"+getHeureArrivee()+getLieuDepart()+getLieuArrivee()+"\n";
 	}
 	
 	public String StringTache(){
@@ -37,6 +43,10 @@ public class Tache {
 	public String HeureArriveeTache(){
 		String resultat=((this.HeureArrivee)%60)+" heures "+(this.HeureArrivee-((this.HeureArrivee)%60)*60)+" minutes";
 		return resultat;
+	}
+	
+	public Chauffeur getChauffeurTache(Solution solution){
+		return solution.getChauffeur(this.numeroChauffeur-1);
 	}
 	
 	public int getNumeroTache() {
@@ -68,6 +78,12 @@ public class Tache {
 	}
 	public void setLieuArrivee(String lieuArrivee) {
 		LieuArrivee = lieuArrivee;
+	}
+	public int getNumeroChauffeur() {
+		return numeroChauffeur;
+	}
+	public void setNumeroChauffeur(int numeroChauffeur) {
+		this.numeroChauffeur = numeroChauffeur;
 	}
 	
 }

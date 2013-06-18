@@ -23,6 +23,7 @@ public class Solution {
 	private int dureeMaximale;
 	private int totalTaches;
 	protected static ArrayList<Chauffeur> chauffeurs = new ArrayList<Chauffeur>();
+	protected static ArrayList<Tache> taches = new ArrayList<Tache>();
 	
 
 	public Solution(){
@@ -154,8 +155,10 @@ public class Solution {
 					heureArrivee=Integer.parseInt(c.substring(11, c.length()-2));
 					lieuDepart=c.substring(c.length()-2, c.length()-1);
 					lieuArrivee=c.substring(c.length()-1);
-					Tache nouvelleTache = new Tache(numero, heureDepart, heureArrivee, lieuDepart,lieuArrivee);
+					Tache nouvelleTache = new Tache(numero, i, heureDepart, heureArrivee, lieuDepart,lieuArrivee);
 					nouveauChauffeur.AjouterTacheChauffeur(nouvelleTache);
+					this.taches.add(nouvelleTache);
+					
 					
 					strLine=br.readLine();
 					if(strLine.compareTo("")!=0){
@@ -292,7 +295,7 @@ public class Solution {
 	
 	public String StringSolution(){
 		String resultat="";
-		System.out.println("**********The solution contains "+this.getNombreChauffeurs()+" driver(s) and "+this.getTotalTaches()+" tasks.**********");
+		resultat=resultat+"**********The solution contains "+this.getNombreChauffeurs()+" driver(s) and "+this.getTotalTaches()+" tasks.**********"+"\n";
 		for (int i=0; i<this.chauffeurs.size(); i++){
 			resultat=resultat+(this.chauffeurs.get(i)).StringChauffeur(this)+"\n";
 		}
@@ -341,6 +344,7 @@ public class Solution {
 		dureeMaximale=600;			//Valeur par dŽfaut
 		totalTaches=0;
 		this.chauffeurs.clear();
+		this.taches.clear();
 	}
 	
 	public String GetHoraire(int minutes){
@@ -350,6 +354,10 @@ public class Solution {
 	
 	public Chauffeur getChauffeur(int i){
 		return chauffeurs.get(i);
+	}
+	
+	public Tache getTacheSolution(int i){
+		return taches.get(i);
 	}
 	
 	public int getServiceMatin() {
@@ -371,7 +379,11 @@ public class Solution {
 	public static ArrayList<Chauffeur> getChauffeurs() {
 		return chauffeurs;
 	}
-
+	
+	public static ArrayList<Tache> getTachesSolution(){
+		return taches;
+	}
+	
 	public void setServiceMatin(int serviceMatin) {
 		this.serviceMatin = serviceMatin;
 	}
