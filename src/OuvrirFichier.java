@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -16,8 +17,9 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 	private JTextArea Texte, CoutSolution, NbChauffeur, CoutTotal, Diagramme;
 	private JPanel TextSolution;
 	private Cadre CoutSolution_c, NbChauffeur_c, CoutTotal_c, ZoneTexte_c, NbTache_c, TypeService_c,
-				  TypeService1_c, NbTacheCh_c, WorkerTime_c, UnderTime_c, OverTime_c, IdleTime_c, Cost_c;
-	private JComboBox Chauffeur_cb;
+				  TypeService1_c, NbTacheCh_c, WorkerTime_c, UnderTime_c, OverTime_c, IdleTime_c, Cost_c,
+                  HeureDepart_c, HeureArrivee_c, LieuDepart_c, LieuArrivee_c, ChauffeurAssocie_c;
+	private JComboBox Chauffeur_cb, Tache_cb;
 	private Solution testSolution;
     private JPanel Onglet2;
 	
@@ -126,8 +128,8 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 
         JPanel temp = new JPanel();
         //final DiagGantt demo = new DiagGantt("Diagramme de Gantt des Chauffeurs");
-        DiagGantt chart1 = new DiagGantt("Test");
-        temp = chart1.creationChart();
+        DiagGantt chart1 = new DiagGantt("Test", "");
+        temp = chart1.creationChart("");
         //demo.pack();
         //demo.setVisible(true);
         //temp.add(chart1);
@@ -408,7 +410,7 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 			    }
 		else{
 			ZoneTexte_c.getTexte().append("Erreur d'ouverture du fichier\n");
-			//ZoneTexte_c.getTexte().setText(""); t
+			//ZoneTexte_c.getTexte().setText("");
 		}
 		//Interraction avec la combo Box
         //NbTache_c.getTexte().append(" " +testSolution.getChauffeur(Integer.parseInt((String)Chauffeur_cb.getSelectedItem())).getCost());
