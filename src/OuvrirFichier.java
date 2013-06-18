@@ -1,16 +1,14 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 
 public class OuvrirFichier extends JFrame implements ActionListener {
 	private JFileChooser OpenFile;
 	private File file;
-	private int actionSouris; //Lorsque l'on clique sur le bouton
+	private int actionSouris; //Lorsque l'on clique sur le bouton recherche fichier
 	private JTable tableau;
 	private String[][] data;
 	private String title[];
@@ -18,9 +16,10 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 	private JPanel TextSolution;
 	private Cadre CoutSolution_c, NbChauffeur_c, CoutTotal_c, ZoneTexte_c, NbTache_c, TypeService_c,
 				  TypeService1_c, NbTacheCh_c, WorkerTime_c, UnderTime_c, OverTime_c, IdleTime_c, Cost_c,
-                  HeureDepart_c, HeureArrivee_c, LieuDepart_c, LieuArrivee_c, ChauffeurAssocie_c;
+				  HeureDepart_c, HeureArrivee_c, LieuDepart_c, LieuArrivee_c, ChauffeurAssocie_c;
 	private JComboBox Chauffeur_cb, Tache_cb;
 	private Solution testSolution;
+    private JCheckBox TexteSimplifie, TexteComplet;
     private JPanel Onglet2;
 	
 	int marqueur = 0;
@@ -109,7 +108,7 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		//--------D�claration des cadres pour l'onglet 1 -------------------\\
 		CoutSolution_p = CoutSolution_c.CreerCadre_1("Cout de la solution", 100, 100);
 		NbChauffeur_p = NbChauffeur_c.CreerCadre_1("Nombre de Chauffeur", 100, 100);
-		CoutTotal_p = CoutTotal_c.CreerCadre_1("Cout total", 100, 100);
+		//CoutTotal_p = CoutTotal_c.CreerCadre_1("Cout total", 100, 100);
 		NbTache_p = NbTache_c.CreerCadre_1("Nombre de taches", 100, 100);
 		TypeService_p = TypeService_c.CreerCadre_1("Type de service", 100, 100);
 		
@@ -123,7 +122,8 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		
 		//D�claration de la combobox de l'onglet 3
 		Chauffeur_cb = new JComboBox();
-		Chauffeur_cb.addItem("0");
+		Chauffeur_cb.addItem("Pas de chauffeur.");
+		
 		TextSolution = ZoneTexte_c.CreerCadre_scrollpane("Affichage de la solution", 200, 400);
 
         JPanel temp = new JPanel();
@@ -156,7 +156,7 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		
 		Onglet1.add(CoutSolution_p);
 		Onglet1.add(NbChauffeur_p);
-		Onglet1.add(CoutTotal_p);
+		//Onglet1.add(CoutTotal_p);
 		Onglet1.add(NbTache_p);
 		Onglet1.add(TypeService_p);
 		
@@ -182,19 +182,54 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		OngletSolution.add(Onglet3, "Detail par chauffeur");
 		OngletSolution.add(Onglet4, "Detail par tache");
 		
-		JButton button = new JButton("Ouvrir un fichier");
-		try {
-			Image img = ImageIO.read(getClass().getResource("C:/Users/arnaudv/git/LO43_Projet/badge.jpg"));
-		    button.setIcon(new ImageIcon(img));
-		} catch (IOException ex) {
-		}
-		button.addActionListener(this);
-		buttonPanel.add(button);
+		//JButton button = new JButton("Ouvrir un fichier");
+
+		//Image img = ImageIO.read(getClass().getResource("C:/Users/arnaudv/git/LO43_Projet/badge.jpg"));
+		//button.setIcon(new ImageIcon("C:\\Users\\Simon\\workspace\\LO43_Projet\\open-source-icons\\JPG\\purple\\badge.jpg"));
+
+		//button.addActionListener(this);
+		//buttonPanel.add(button);
 		
 		JButton OpenButton = new JButton("Ouvrir un fichier"); //Bouton pour ouvrir un fichier
-		OpenButton.addActionListener(this);
+		OpenButton.setIcon(new ImageIcon("C:\\Users\\Simon\\workspace\\LO43_Projet\\open-source-icons\\PNG\\purple\\add-item.png"));
+        OpenButton.addActionListener(this);
         buttonPanel.add(OpenButton);
-        
+
+        TexteComplet = new JCheckBox("Affichage complet");
+        TexteSimplifie = new JCheckBox("Affichage simplifie");
+        TexteSimplifie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //To change body of implemented methods use File | Settings | File Templates.
+                if(TexteComplet.isSelected() == true){
+                    System.out.println("Essai");
+                    TexteComplet.setSelected(false);
+                }
+                if(marqueur == 1){
+                    ZoneTexte_c.getTexte().setText("");
+                    for(int i = 0; i < testSolution.getChauffeurs().size();i++){
+                        //Texte.append(" " + testSolution.getChauffeurs().get(i).getNumeroChauffeur() +"   |   " + testSolution.getChauffeurs().get(i).getCost()+  "\n");
+                        ZoneTexte_c.getTexte().append("  " + testSolution.getChauffeurs().get(i).getNumeroChauffeur() +"   |   " + testSolution.getChauffeurs().get(i).getCost()+  "\n");
+                    }
+                }
+            }
+        });
+        TexteComplet.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //To change body of implemented methods use File | Settings | File Templates.
+                if(TexteSimplifie.isSelected() == true){
+                    System.out.println("Essai");
+                    TexteSimplifie.setSelected(false);
+                }
+                if(marqueur == 1){
+                    ZoneTexte_c.getTexte().setText(" ");
+                }
+            }
+        });
+
+        buttonPanel.add(TexteComplet);
+        buttonPanel.add(TexteSimplifie);
         Border bordNoir = BorderFactory.createLineBorder(Color.GRAY);
         buttonPanel.setBorder(bordNoir);
         
@@ -212,10 +247,10 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 	            	TypeService1_c.getTexte().setText("");
 	            	WorkerTime_c.getTexte().setText("");
 	        
-	            	NbTacheCh_c.getTexte().append(" " + testSolution.getChauffeur(test).getNombreTaches());
-	            	Cost_c.getTexte().append(" "+testSolution.getChauffeur(test).getCost());
+	            	NbTacheCh_c.getTexte().append(" " + testSolution.getChauffeur(test).getNombreTaches() + " t�ches");
+	            	Cost_c.getTexte().append(" "+testSolution.getChauffeur(test).getCost()+ " min");
 	            	TypeService1_c.getTexte().append(" " + testSolution.getChauffeur(test).PrintService());
-	            	WorkerTime_c.getTexte().append(" "+ testSolution.getChauffeur(test).getWorkerTimeSum());
+	            	WorkerTime_c.getTexte().append(" "+ testSolution.getChauffeur(test).getWorkerTimeSum() + " min");
             	}
             }
         });
@@ -365,7 +400,6 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 			NbTache_c.getTexte().setText("");
 			TypeService_c.getTexte().setText("");
 			
-			
 			    	String fichierSolution = file.getName();
 			    	//Solution testSolution = new Solution();
 			    	testSolution = new Solution();
@@ -381,8 +415,7 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 			    									"Service du soir  : " + testSolution.getServiceSoir()  + "\n" +
 			    									"Service de nuit  : " + testSolution.getServiceNuit()  + "\n");
 			    	
-			    	
-			    	Chauffeur_cb.removeAllItems();
+			    	Chauffeur_cb.removeAllItems(); // Nettoie la combo box
 			    	Chauffeur_cb.repaint();
 			    	for(int i = 0; i < testSolution.getNombreChauffeurs(); i++){
 			    		Chauffeur_cb.addItem("Chauffeur n�" + testSolution.getChauffeur(i).getNumeroChauffeur());
@@ -397,14 +430,6 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 			    		//Texte.append(" " + testSolution.getChauffeurs().get(i).getNumeroChauffeur() +"   |   " + testSolution.getChauffeurs().get(i).getCost()+  "\n");
 			    		ZoneTexte_c.getTexte().append("   " + testSolution.getChauffeurs().get(i).getNumeroChauffeur() +"   |   " + testSolution.getChauffeurs().get(i).getCost()+  "\n");
 			    	}
-
-                JPanel DiagGantt = new JPanel(); //Panel pour le diagramme de Gantt
-                JPanel temp = new JPanel();
-                DiagGantt chart1 = new DiagGantt("Test", fichierSolution);
-                temp = chart1.creationChart(fichierSolution);
-                DiagGantt.add(temp);
-                Onglet2.repaint();
-
 			    	
 			    	marqueur = 1;
 			    }
