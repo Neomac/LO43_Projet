@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 public class OuvrirFichier extends JFrame implements ActionListener {
 	private JFileChooser OpenFile;
@@ -60,6 +61,14 @@ public class OuvrirFichier extends JFrame implements ActionListener {
         JPanel IdleTime_p = new JPanel();
         JPanel Cost_p = new JPanel();
         
+        
+        //---------Declaration des onglets pour l'onglet 4 -----------\\
+        JPanel HeureDepart_p = new JPanel();
+        JPanel HeureArrivee_p = new JPanel();
+        JPanel LieuDepart_p = new JPanel();
+        JPanel LieuArrivee_p = new JPanel();
+        JPanel ChauffeurAssocie_p = new JPanel();
+        
         JTabbedPane OngletSolution = new JTabbedPane(); //Onglet qui contient les panels onglet1 et onglet2
         
         Texte = new JTextArea(); //Zone de texte pour l'affichage de la solution
@@ -86,6 +95,13 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		IdleTime_c = new Cadre();
 		Cost_c = new Cadre();
 		
+		//--------Cadres pour l'onglet 4 -------------------\\
+		HeureDepart_c = new Cadre();
+		HeureArrivee_c = new Cadre();
+		LieuDepart_c = new Cadre();
+		LieuArrivee_c = new Cadre();
+		ChauffeurAssocie_c = new Cadre();
+		
 		/*Cadre*/ ZoneTexte_c = new Cadre(); //Cadre pour la zone de texte
 		
 		//--------D�claration des cadres pour l'onglet 1 -------------------\\
@@ -110,8 +126,8 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 
         JPanel temp = new JPanel();
         //final DiagGantt demo = new DiagGantt("Diagramme de Gantt des Chauffeurs");
-        DiagGantt chart1 = new DiagGantt("Test", "");
-        temp = chart1.creationChart("");
+        DiagGantt chart1 = new DiagGantt("Test");
+        temp = chart1.creationChart();
         //demo.pack();
         //demo.setVisible(true);
         //temp.add(chart1);
@@ -123,6 +139,17 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		//DiagGantt.add(Diagramme);
         DiagGantt.add(temp);
 		
+        //-----------Declaration des cadres pour l'onglet 4 --------------\\
+        HeureDepart_p = HeureDepart_c.CreerCadre_1("Heure de depart", 100, 100);
+        HeureArrivee_p = HeureArrivee_c.CreerCadre_1("Heure d'arrivee", 100, 100);
+        LieuDepart_p = LieuDepart_c.CreerCadre_1("Lieu de depart", 100, 100);
+        LieuArrivee_p = LieuArrivee_c.CreerCadre_1("Lieu d'arrivee", 100, 100);
+        ChauffeurAssocie_p = ChauffeurAssocie_c.CreerCadre_1("Chauffeur associe a cette tache", 100, 100);
+        //-----------Declaration de la combo box de l'onglet 4 -----------\\
+        Tache_cb = new JComboBox();
+        Tache_cb.addItem("Pas de tache.");
+        
+        
 		Onglet1.setLayout(new GridLayout(3,2));
 		
 		Onglet1.add(CoutSolution_p);
@@ -142,10 +169,25 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		Onglet3.add(OverTime_p);
 		Onglet3.add(Cost_p);
 		
+		Onglet4.add(HeureDepart_p);
+		Onglet4.add(HeureArrivee_p);
+		Onglet4.add(LieuDepart_p);
+		Onglet4.add(LieuArrivee_p);
+		Onglet4.add(ChauffeurAssocie_p);
+		
 		OngletSolution.add(Onglet1, "Affichage des couts");
 		OngletSolution.add(Onglet2, "Diagramme de Gantt");
 		OngletSolution.add(Onglet3, "Detail par chauffeur");
 		OngletSolution.add(Onglet4, "Detail par tache");
+		
+		JButton button = new JButton("Ouvrir un fichier");
+		try {
+			Image img = ImageIO.read(getClass().getResource("C:/Users/arnaudv/git/LO43_Projet/badge.jpg"));
+		    button.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
+		button.addActionListener(this);
+		buttonPanel.add(button);
 		
 		JButton OpenButton = new JButton("Ouvrir un fichier"); //Bouton pour ouvrir un fichier
 		OpenButton.addActionListener(this);
@@ -176,6 +218,28 @@ public class OuvrirFichier extends JFrame implements ActionListener {
             }
         });
         
+        Tache_cb.addActionListener(new ActionListener () {
+        	public void actionPerformed(ActionEvent e){
+        		if(marqueur == 1){
+        			int temp = 0;
+        			temp = Tache_cb.getSelectedIndex(); //Recuperation de l'information de la comboBox
+        			
+        			//Reinitialisation des champs de texte
+        			HeureDepart_c.getTexte().setText("");
+        			HeureArrivee_c.getTexte().setText("");
+        			LieuDepart_c.getTexte().setText("");
+        			LieuArrivee_c.getTexte().setText("");
+        			ChauffeurAssocie_c.getTexte().setText("");
+        			
+        			//Renseignement des champs apres selection d'un onglet
+        			HeureDepart_c.getTexte().append(" " );
+        			HeureArrivee_c.getTexte().append("");
+        			LieuDepart_c.getTexte().append("");
+        			LieuArrivee_c.getTexte().append("");
+        			ChauffeurAssocie_c.getTexte().append("");
+        		}
+        	}
+        });
         //Texte.setSize(10, 10);
         //TextSolution.add(new JScrollPane(Texte), BorderLayout.CENTER);
         
@@ -286,11 +350,18 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		actionSouris = OpenFile.showOpenDialog(OuvrirFichier.this);
 		file = OpenFile.getSelectedFile();
+		marqueur = 0;
 		//System.out.println("test");
 		//------------------------------------------
 		 String  title[] = {"Num�ro Chauffeur", "Cout"};
 		if (actionSouris == JFileChooser.APPROVE_OPTION) {
 			 
+			//Reinitialisation des champs de parametres des zones de texte
+			ZoneTexte_c.getTexte().setText(" ");
+			CoutSolution_c.getTexte().setText("");
+			NbChauffeur_c.getTexte().setText("");
+			NbTache_c.getTexte().setText("");
+			TypeService_c.getTexte().setText("");
 			
 			
 			    	String fichierSolution = file.getName();
@@ -303,6 +374,10 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 			    	CoutSolution_c.getTexte().append(" " + testSolution.getCoutTotal() + " ");
 			    	NbChauffeur_c.getTexte().append(" " + testSolution.getNombreChauffeurs() + " ");
 			    	NbTache_c.getTexte().append(" " + testSolution.getTotalTaches() + " ");
+			    	TypeService_c.getTexte().append("Service du matin : " + testSolution.getServiceMatin() + "\n" +
+			    									"Service de jour  : " + testSolution.getServiceJour()  + "\n" +
+			    									"Service du soir  : " + testSolution.getServiceSoir()  + "\n" +
+			    									"Service de nuit  : " + testSolution.getServiceNuit()  + "\n");
 			    	
 			    	
 			    	Chauffeur_cb.removeAllItems();
@@ -311,6 +386,10 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 			    		Chauffeur_cb.addItem("Chauffeur n�" + testSolution.getChauffeur(i).getNumeroChauffeur());
 			    	}
 			    	
+			    	Tache_cb.removeAllItems(); // Nettoie la combo box
+			    	for(int i = 0; i < testSolution.getTotalTaches(); i++){
+			    		Tache_cb.addItem("Tache n" ); //Rajouter le nombre de taches
+			    	}
 			    	
 			    	for(int i = 0; i < testSolution.getChauffeurs().size();i++){
 			    		//Texte.append(" " + testSolution.getChauffeurs().get(i).getNumeroChauffeur() +"   |   " + testSolution.getChauffeurs().get(i).getCost()+  "\n");

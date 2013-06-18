@@ -31,8 +31,12 @@ public class Solution {
 		totalIdleTime=0;
 		totalUnderTime=0;
 		totalOverTime=0;
+		serviceMatin=0;
+		serviceJour=0;
+		serviceSoir=0;
+		serviceNuit=0;
 		dureePauseLegale=30;		//Valeur par défaut
-		dureePauseSecondaire=20;
+		dureePauseSecondaire=20;	//Valeur par défaut
 		dureeLegale=480;			//Valeur par défaut
 		dureeMaximale=600;			//Valeur par défaut
 		totalTaches=0;
@@ -80,6 +84,7 @@ public class Solution {
 	public void LectureSolution(String fichierSolution){
 		int numero, heureDepart, heureArrivee, i=0, marker1=0, marker2=0;
 		String lieuDepart, lieuArrivee;
+		this.ReinitialiserSolution();
 		try {
 			FileInputStream fstream = new FileInputStream(fichierSolution);
 			DataInputStream in = new DataInputStream(fstream);
@@ -178,7 +183,7 @@ public class Solution {
 	
 	public void GenerationSolution(Fichier fichierInstance){
 		int i=0, j=0, pause=0, marqueurArret=0, marqueurChoix=0;
-		
+		this.ReinitialiserSolution();
 		while(!((fichierInstance.getTaches()).isEmpty())){
 			i++;
 			j=1;
@@ -299,6 +304,29 @@ public class Solution {
 			this.serviceNuit++;
 			break;
 		}
+	}
+	
+	public void ReinitialiserSolution(){
+		coutTotal=0;
+		nombreChauffeurs=0;
+		totalIdleTime=0;
+		totalUnderTime=0;
+		totalOverTime=0;
+		serviceMatin=0;
+		serviceJour=0;
+		serviceSoir=0;
+		serviceNuit=0;
+		dureePauseLegale=30;		//Valeur par défaut
+		dureePauseSecondaire=20;	//Valeur par défaut
+		dureeLegale=480;			//Valeur par défaut
+		dureeMaximale=600;			//Valeur par défaut
+		totalTaches=0;
+		this.chauffeurs.clear();
+	}
+	
+	public String GetHoraire(int minutes){
+		String resultat;
+		return resultat=((minutes)%60)+" heures "+(minutes-((minutes)%60)*60)+" minutes";
 	}
 	
 	public Chauffeur getChauffeur(int i){

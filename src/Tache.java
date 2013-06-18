@@ -25,6 +25,16 @@ public class Tache {
 		System.out.println("Task:"+getNumeroTache()+"\tstartTime:"+getHeureDepart()+"\tfinishTime:"+getHeureArrivee()+getLieuDepart()+getLieuArrivee());
 	}
 	
+	public String HeureDepartTache(){
+		String resultat;
+		return resultat=((this.HeureDepart)%60)+" heures "+(this.HeureDepart-((this.HeureDepart)%60)*60)+" minutes";
+	}
+	
+	public String HeureArriveeTache(){
+		String resultat;
+		return resultat=((this.HeureArrivee)%60)+" heures "+(this.HeureArrivee-((this.HeureArrivee)%60)*60)+" minutes";
+	}
+	
 	public int getNumeroTache() {
 		return numeroTache;
 	}
