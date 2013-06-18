@@ -27,12 +27,12 @@ public class DiagGantt {
 
     public DiagGantt(){
         DiagGantt test = new DiagGantt();
-        test.creationChart();
+        test.creationChart("");
     }
 
-    public DiagGantt(final String title) {
+    public DiagGantt(final String title, String nomFichier) {
 
-        final IntervalCategoryDataset dataset = createDataset();
+        final IntervalCategoryDataset dataset = createDataset(nomFichier);
         final JFreeChart chart = createChart(dataset);
 
         // add the chart to a panel...
@@ -41,29 +41,34 @@ public class DiagGantt {
 
     }
 
-    public JPanel creationChart(){
+    public JPanel creationChart(String nomFichier){
         JPanel PanelChart = new JPanel();
-        final IntervalCategoryDataset dataset = createDataset();
+        final IntervalCategoryDataset dataset = createDataset(nomFichier);
         final JFreeChart chart = createChart(dataset);
         ChartPanel ChartP = new ChartPanel(chart);
         PanelChart.add(ChartP);
         return PanelChart;
     }
 
-    public static IntervalCategoryDataset createDataset() {
+    public static IntervalCategoryDataset createDataset(String nomFichier) {
 
 
-        String fichierSolution = "Solution_1.txt";
-        testSolution.LectureSolution(fichierSolution);
+        testSolution.LectureSolution(nomFichier);
 
         final TaskSeriesCollection collection = new TaskSeriesCollection(); // Création de la collection
 
-        for (int i = 0; i < testSolution.getChauffeurs().size(); i++){
-            final TaskSeries tempTask = new TaskSeries(Integer.toString(testSolution.getChauffeur(i).getNumeroChauffeur())); // Création d'une serie de tache
-            for (int j = 0; j < testSolution.getChauffeurs().get(i).getTachesChauffeur().size(); j++){
-               tempTask.add(new Task("Chauffeur numero " + Integer.toString(testSolution.getChauffeur(i).getNumeroChauffeur()),new SimpleTimePeriod(testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureDepart()*1000*60 /*Passage en minutes*/, testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureArrivee()*1000*60 /* Passage en minutes*/))); // Ajout de la tache a la serie de tache
+        if (nomFichier == "") {
+            final TaskSeries nullTask = new TaskSeries("");
+            collection.add(nullTask);
+        }
+        else {
+            for (int i = 0; i < testSolution.getChauffeurs().size(); i++){
+                final TaskSeries tempTask = new TaskSeries(Integer.toString(testSolution.getChauffeur(i).getNumeroChauffeur())); // Création d'une serie de tache
+                for (int j = 0; j < testSolution.getChauffeurs().get(i).getTachesChauffeur().size(); j++){
+                    tempTask.add(new Task("Chauffeur numero " + Integer.toString(testSolution.getChauffeur(i).getNumeroChauffeur()),new SimpleTimePeriod(testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureDepart()*1000*60 /*Passage en minutes*/, testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureArrivee()*1000*60 /* Passage en minutes*/))); // Ajout de la tache a la serie de tache
+                }
+                collection.add(tempTask); // Ajout de la serie de tache a la collection
             }
-            collection.add(tempTask); // Ajout de la serie de tache a la collection
         }
 
         return collection;

@@ -18,6 +18,7 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 				  TypeService1_c, NbTacheCh_c, WorkerTime_c, UnderTime_c, OverTime_c, IdleTime_c, Cost_c;
 	private JComboBox Chauffeur_cb;
 	private Solution testSolution;
+    private JPanel Onglet2;
 	
 	int marqueur = 0;
 	
@@ -109,8 +110,8 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 
         JPanel temp = new JPanel();
         //final DiagGantt demo = new DiagGantt("Diagramme de Gantt des Chauffeurs");
-        DiagGantt chart1 = new DiagGantt("Test");
-        temp = chart1.creationChart();
+        DiagGantt chart1 = new DiagGantt("Test", "");
+        temp = chart1.creationChart("");
         //demo.pack();
         //demo.setVisible(true);
         //temp.add(chart1);
@@ -315,6 +316,14 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 			    		//Texte.append(" " + testSolution.getChauffeurs().get(i).getNumeroChauffeur() +"   |   " + testSolution.getChauffeurs().get(i).getCost()+  "\n");
 			    		ZoneTexte_c.getTexte().append("   " + testSolution.getChauffeurs().get(i).getNumeroChauffeur() +"   |   " + testSolution.getChauffeurs().get(i).getCost()+  "\n");
 			    	}
+
+                JPanel DiagGantt = new JPanel(); //Panel pour le diagramme de Gantt
+                JPanel temp = new JPanel();
+                DiagGantt chart1 = new DiagGantt("Test", fichierSolution);
+                temp = chart1.creationChart(fichierSolution);
+                DiagGantt.add(temp);
+                Onglet2.repaint();
+
 			    	
 			    	marqueur = 1;
 			    }
