@@ -1,9 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 public class OuvrirFichier extends JFrame implements ActionListener {
 	private JFileChooser OpenFile;
@@ -126,8 +128,11 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 
         JPanel temp = new JPanel();
         //final DiagGantt demo = new DiagGantt("Diagramme de Gantt des Chauffeurs");
-        DiagGantt chart1 = new DiagGantt("Test");
-        temp = chart1.creationChart();
+        
+        //DiagGantt chart1 = new DiagGantt("Test");
+        //temp = chart1.creationChart();
+        
+        
         //demo.pack();
         //demo.setVisible(true);
         //temp.add(chart1);
@@ -179,6 +184,15 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		OngletSolution.add(Onglet2, "Diagramme de Gantt");
 		OngletSolution.add(Onglet3, "Detail par chauffeur");
 		OngletSolution.add(Onglet4, "Detail par tache");
+		
+		JButton button = new JButton("Ouvrir un fichier");
+		try {
+			Image img = ImageIO.read(getClass().getResource("C:/Users/arnaudv/git/LO43_Projet/badge.jpg"));
+		    button.setIcon(new ImageIcon(img));
+		} catch (IOException ex) {
+		}
+		button.addActionListener(this);
+		buttonPanel.add(button);
 		
 		JButton OpenButton = new JButton("Ouvrir un fichier"); //Bouton pour ouvrir un fichier
 		OpenButton.addActionListener(this);
@@ -341,6 +355,7 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		actionSouris = OpenFile.showOpenDialog(OuvrirFichier.this);
 		file = OpenFile.getSelectedFile();
+		marqueur = 0;
 		//System.out.println("test");
 		//------------------------------------------
 		 String  title[] = {"Num�ro Chauffeur", "Cout"};
@@ -351,6 +366,7 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 			CoutSolution_c.getTexte().setText("");
 			NbChauffeur_c.getTexte().setText("");
 			NbTache_c.getTexte().setText("");
+			TypeService_c.getTexte().setText("");
 			
 			    	String fichierSolution = file.getName();
 			    	//Solution testSolution = new Solution();
@@ -362,7 +378,10 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 			    	CoutSolution_c.getTexte().append(" " + testSolution.getCoutTotal() + " ");
 			    	NbChauffeur_c.getTexte().append(" " + testSolution.getNombreChauffeurs() + " ");
 			    	NbTache_c.getTexte().append(" " + testSolution.getTotalTaches() + " ");
-			    	
+			    	TypeService_c.getTexte().append("Service du matin : " + testSolution.getServiceMatin() + "\n" +
+			    									"Service de jour  : " + testSolution.getServiceJour()  + "\n" +
+			    									"Service du soir  : " + testSolution.getServiceSoir()  + "\n" +
+			    									"Service de nuit  : " + testSolution.getServiceNuit()  + "\n");
 			    	
 			    	Chauffeur_cb.removeAllItems(); // Nettoie la combo box
 			    	Chauffeur_cb.repaint();
