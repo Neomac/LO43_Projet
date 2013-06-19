@@ -126,19 +126,11 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		
 		TextSolution = ZoneTexte_c.CreerCadre_scrollpane("Affichage de la solution", 200, 400);
 
+        //Déclaration du diagramme de Gantt
         JPanel temp = new JPanel();
-        //final DiagGantt demo = new DiagGantt("Diagramme de Gantt des Chauffeurs");
-        DiagGantt chart1 = new DiagGantt("Test", "");
-        temp = chart1.creationChart("");
-        //demo.pack();
-        //demo.setVisible(true);
-        //temp.add(chart1);
-        //IntervalCategoryDataset dataset;
-        //dataset.createDataset();
-        //JFreeChart chart = createChart(dataset);
-        //ChartPanel CP = new ChartPanel(demo);
+        DiagGantt chart1 = new DiagGantt("Test", "Solution_1.txt");
+        temp = chart1.creationChart("Solution_1.txt");
 
-		//DiagGantt.add(Diagramme);
         DiagGantt.add(temp);
 		
         //-----------Declaration des cadres pour l'onglet 4 --------------\\

@@ -1,21 +1,14 @@
-import java.awt.*;
-import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.NumberTickUnit;
-import org.jfree.chart.axis.TickUnits;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.time.SimpleTimePeriod;
-import org.jfree.chart.axis.ValueAxis;
 
 
 import javax.swing.*;
@@ -35,7 +28,6 @@ public class DiagGantt {
         final IntervalCategoryDataset dataset = createDataset(nomFichier);
         final JFreeChart chart = createChart(dataset);
 
-        // add the chart to a panel...
         final ChartPanel chartPanel = new ChartPanel(chart);
 
 
@@ -62,12 +54,17 @@ public class DiagGantt {
             collection.add(nullTask);
         }
         else {
-            for (int i = 0; i < testSolution.getChauffeurs().size(); i++){
-                final TaskSeries tempTask = new TaskSeries(Integer.toString(testSolution.getChauffeur(i).getNumeroChauffeur())); // Création d'une serie de tache
-                for (int j = 0; j < testSolution.getChauffeurs().get(i).getTachesChauffeur().size(); j++){
-                    tempTask.add(new Task("Chauffeur numero " + Integer.toString(testSolution.getChauffeur(i).getNumeroChauffeur()),new SimpleTimePeriod(testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureDepart()*1000*60 /*Passage en minutes*/, testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureArrivee()*1000*60 /* Passage en minutes*/))); // Ajout de la tache a la serie de tache
+            int i = 0;
+            while (i < testSolution.getChauffeurs().size()){
+                int j = 0;
+                TaskSeries tempTask = new TaskSeries(Integer.toString(testSolution.getChauffeur(i).getNumeroChauffeur())); // Création d'une serie de tache
+                while(j < testSolution.getChauffeurs().get(i).getTachesChauffeur().size()){
+                    Task temp = new Task("Chauffeur numero " + Integer.toString(testSolution.getChauffeur(i).getNumeroChauffeur()),new SimpleTimePeriod(testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureDepart()*1000*60 /*Passage en minutes*/, testSolution.getChauffeurs().get(i).getTachesChauffeur().get(j).getHeureArrivee()*1000*60 /* Passage en minutes*/));
+                    tempTask.add(temp); // Ajout de la tache a la serie de tache
+                j++;
                 }
                 collection.add(tempTask); // Ajout de la serie de tache a la collection
+                i++;
             }
         }
 
@@ -89,7 +86,7 @@ public class DiagGantt {
                 "Chauffeurs",              // domain axis label
                 "Heures",              // range axis label
                 dataset,             // data
-                false,                // include legend
+                true,                // include legend
                 true,                // tooltips
                 false                // urls
         );
