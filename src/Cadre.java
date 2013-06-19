@@ -1,11 +1,5 @@
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
+import java.awt.*;
 
 
 public class Cadre {
@@ -68,7 +62,7 @@ public class Cadre {
         temp.setPreferredSize(new Dimension(width,height));
         temp.setBorder(BorderFactory.createTitledBorder(titre));
         //JTextArea texte = new JTextArea();
-        Texte = new JTextArea(30,15);
+        Texte = new JTextArea(27,25);
         Texte.setEditable(false);
         temp.add(new JScrollPane(Texte));
         temp.setVisible(true);
