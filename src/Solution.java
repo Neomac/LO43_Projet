@@ -381,9 +381,9 @@ public class Solution {
 		this.taches.clear();
 	}
 	
-	public String GetHoraire(int minutes){
+	public String GetHoraire(int minutes){		//Renvoi
 		String resultat;
-		return resultat=((minutes)%60)+"h"+(minutes-((minutes)%60)*60);
+		return resultat=((minutes-(minutes)%60)/60)+"h"+((minutes)%60);
 	}
 	
 	public Chauffeur getChauffeur(int i){

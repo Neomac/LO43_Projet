@@ -1,4 +1,4 @@
-
+import java.math.*;
 
 public class Tache {
 	private int numeroTache;
@@ -33,16 +33,6 @@ public class Tache {
 	
 	public String StringTache(){
 		return "Task:"+getNumeroTache()+"\tstartTime:"+getHeureDepart()+"\tfinishTime:"+getHeureArrivee()+getLieuDepart()+getLieuArrivee()+"\n";
-	}
-	
-	public String HeureDepartTache(){
-		String resultat=((this.HeureDepart)%60)+" heures "+(this.HeureDepart-((this.HeureDepart)%60)*60)+" minutes";
-		return resultat;
-	}
-	
-	public String HeureArriveeTache(){
-		String resultat=((this.HeureArrivee)%60)+" heures "+(this.HeureArrivee-((this.HeureArrivee)%60)*60)+" minutes";
-		return resultat;
 	}
 	
 	public Chauffeur getChauffeurTache(Solution solution){
