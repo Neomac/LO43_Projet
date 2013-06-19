@@ -82,6 +82,30 @@ public class Solution {
 		System.out.println("DureeMaximumTravail= "+this.getDureeMaximale());
 	}
 	
+	public void CopieTaches(Fichier fichierInstance){
+		Tache TamponTache=new Tache();
+		for(int i=0; i<fichierInstance.getTaches().size();i++){
+			this.taches.add(fichierInstance.getTacheFichier(i));
+		}
+	}
+	
+	public void TriTaches(){							//Fonction de tri des taches selon le numŽro de la tache
+		int j=0;										//nŽcessaire lorsque la liste de tache est rŽcupŽrŽe d'un fichier solution
+		for(int i=0; i<this.taches.size();i++){
+			j=this.RechercheIndexTacheNumero(i+1);		//Le +1 est lˆ car les numŽros des taches commencent ˆ 1 et non pas 0
+			this.taches.add(i, this.taches.remove(j));	//On efface la tache de sa position pour l'insŽrer ˆ la place i
+		}
+	}
+	
+	public int RechercheIndexTacheNumero(int numero){	//Fonction renvoyant l'index d'une tache dans la liste taches selon un numero de tache
+		int j=0;
+		for(int i=0; i<this.taches.size();i++){
+			if(this.taches.get(i).getNumeroTache()==numero)
+				j=i;
+		}
+		return j;
+	}
+	
 	public void LectureSolution(String fichierSolution){
 		int numero, heureDepart, heureArrivee, i=0, marker1=0, marker2=0;
 		String lieuDepart, lieuArrivee;
@@ -159,7 +183,6 @@ public class Solution {
 					nouveauChauffeur.AjouterTacheChauffeur(nouvelleTache);
 					this.taches.add(nouvelleTache);
 					
-					
 					strLine=br.readLine();
 					if(strLine.compareTo("")!=0){
 						marker1=1;
@@ -178,6 +201,7 @@ public class Solution {
 			strLine = br.readLine();
 			strLine = br.readLine();
 			this.coutTotal=Integer.parseInt(strLine.substring(10));
+			this.TriTaches();
 			in.close();
 			
 		} catch (Exception e) {
@@ -188,6 +212,7 @@ public class Solution {
 	public void GenerationSolution(Fichier fichierInstance){
 		int i=0, j=0, pause=0, marqueurArret=0, marqueurChoix=0;
 		this.ReinitialiserSolution();
+		this.CopieTaches(fichierInstance);
 		while(!((fichierInstance.getTaches()).isEmpty())){
 			i++;
 			j=1;
@@ -308,6 +333,15 @@ public class Solution {
 		resultat=resultat+"Services du jour: "+this.getServiceJour()+"\n";
 		resultat=resultat+"Services du soir: "+this.getServiceSoir()+"\n";
 		resultat=resultat+"Services de nuit : "+this.getServiceNuit()+"\n";
+		return resultat;
+	}
+	
+	public String StringTaches(){		//Renvoie un String resultat contenant le descriptif de toutes les taches au format des fichiers solutions
+		String resultat="";
+		for (int i=0; i<this.taches.size(); i++){
+			resultat=resultat+((this.taches.get(i)).StringTache());
+			
+		}
 		return resultat;
 	}
 	

@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 //Commit Test 2
-//truc
 
 public class Chauffeur {
 	private int typeService;
