@@ -383,7 +383,7 @@ public class Solution {
 	
 	public String GetHoraire(int minutes){
 		String resultat;
-		return resultat=((minutes)%60)+" heures "+(minutes-((minutes)%60)*60)+" minutes";
+		return resultat=((minutes)%60)+"h"+(minutes-((minutes)%60)*60);
 	}
 	
 	public Chauffeur getChauffeur(int i){
