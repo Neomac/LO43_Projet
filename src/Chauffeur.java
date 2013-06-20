@@ -10,6 +10,8 @@ public class Chauffeur {
 	private int overTime;			//Temps de travail au dessus de la durée légale
 	private int idleTime;			//Temps d'inactivité du Chauffeur
 	private int cost;				//Cout du Chauffeur
+	private int heureDepart;
+	private int heureFin;
 	private int nombrePause;		//Nombre de pauses prises par le Chauffeur
 	private ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();	//Liste des taches assignées au Chauffeur dans l'ordre chronologique
 
@@ -23,6 +25,8 @@ public class Chauffeur {
 		idleTime=0;
 		cost=0;
 		nombrePause=0;
+		heureDepart=0;
+		heureFin=0;
 	}
 	
 	//Constructeur de Chauffeur
@@ -60,6 +64,8 @@ public class Chauffeur {
 			this.cost=this.underTime+this.idleTime;
 		else
 			this.cost=this.overTime+this.idleTime;
+		heureFin=this.tachesChauffeur.get(this.tachesChauffeur.size()-1).getHeureArrivee();
+		heureDepart=this.tachesChauffeur.get(0).getHeureDepart();
 	}
 	
 	//Ajout du Tache à tachesChauffeur
@@ -89,7 +95,7 @@ public class Chauffeur {
 		(this.tachesChauffeur.get(i++)).PrintTache();
 	}
 	
-	//Idem de PrintChauffeur mais renvoie le résultat sous forme de String pour pouvoir être exploité par l'interface graphique
+	//Idem que PrintChauffeur mais renvoie le résultat sous forme de String pour pouvoir être exploité par l'interface graphique
 	public String StringChauffeur(Solution solution){
 		String resultat="";
 		int i;
@@ -216,5 +222,23 @@ public class Chauffeur {
 	public void setNombrePause(int _nombrePause) {
 		this.nombrePause = _nombrePause;
 	}
+
+	public int getHeureDepart() {
+		return heureDepart;
+	}
+
+	public int getHeureFin() {
+		return heureFin;
+	}
+
+	public void setHeureDepart(int heureDepart) {
+		this.heureDepart = heureDepart;
+	}
+
+	public void setHeureFin(int heureFin) {
+		this.heureFin = heureFin;
+	}
+	
+	
 	
 }

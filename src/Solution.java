@@ -8,24 +8,25 @@ import java.util.StringTokenizer;
 //Commit Test 2
 
 public class Solution {
-	private int coutTotal;
-	private int nombreChauffeurs;
-	private int totalIdleTime;
-	private int totalUnderTime;
-	private int totalOverTime;
-	private int serviceMatin;
-	private int serviceJour;
-	private int serviceSoir;
-	private int serviceNuit;
-	private int dureePauseLegale;
-	private int dureePauseSecondaire;
-	private int dureeLegale;
-	private int dureeMaximale;
-	private int totalTaches;
-	protected static ArrayList<Chauffeur> chauffeurs = new ArrayList<Chauffeur>();
-	protected static ArrayList<Tache> taches = new ArrayList<Tache>();
+	private int coutTotal;					//coutTotal de la solution
+	private int nombreChauffeurs;			//nombre total de Chauffeurs de la solution
+	private int totalIdleTime;				//temps d'inactivité total
+	private int totalUnderTime;				//temps total en dessous de la duree légale 
+	private int totalOverTime;				//temps total au dessus de la duree légale
+	private int serviceMatin;				//Nombre total de chauffeurs en service du matin
+	private int serviceJour;				//Nombre total de chauffeurs en service du jour
+	private int serviceSoir;				//Nombre total de chauffeurs en service du soir
+	private int serviceNuit;				//Nombre total de chauffeurs en service de nuit
+	private int dureePauseLegale;			//duree de la pause legale obligatoire
+	private int dureePauseSecondaire;		//duree des eventuelles pauses apres 4h de travail consecutif
+	private int dureeLegale;				//duree normale de travail
+	private int dureeMaximale;				//duree maximale de travail
+	private int totalTaches;				//nombre total de taches
+	protected static ArrayList<Chauffeur> chauffeurs = new ArrayList<Chauffeur>();	//liste de chauffeurs de la solution
+	protected static ArrayList<Tache> taches = new ArrayList<Tache>();				//Copie de la liste des taches de la solution
+																					//Utilisée par l'interface graphique pour accéder directement aux taches
 	
-
+	//Constructeur par défaut de Solution
 	public Solution(){
 		coutTotal=0;
 		nombreChauffeurs=0;
@@ -43,6 +44,8 @@ public class Solution {
 		totalTaches=0;
 	}
 	
+	//Lecture du fichier de configuration et mise à jour des attributs configurables:
+	//dureePauseLegale, dureePauseSecondaire, dureeLegale et dureeMaximale
 	public void LectureConfiguration(String fichierConfiguration){
 		try{
 			FileInputStream fstream = new FileInputStream(fichierConfiguration);
@@ -74,6 +77,7 @@ public class Solution {
 		}
 	}
 	
+	//Impression des attibuts configurables
 	public void PrintConfiguration(){
 		System.out.println("Configuration:");
 		System.out.println("DureePauseLegale= "+this.getDureePauseLegale());
@@ -82,6 +86,7 @@ public class Solution {
 		System.out.println("DureeMaximumTravail= "+this.getDureeMaximale());
 	}
 	
+	//Copie de la liste des taches du fichier d'instance dans la liste "taches"
 	public void CopieTaches(Fichier fichierInstance){
 		Tache TamponTache=new Tache();
 		for(int i=0; i<fichierInstance.getTaches().size();i++){
@@ -89,22 +94,26 @@ public class Solution {
 		}
 	}
 	
-	public void TriTaches(){							//Fonction de tri des taches selon le numéro de la tache
-		int j=0;										//nécessaire lorsque la liste de tache est récupérée d'un fichier solution
+	//Fonction de tri des taches selon le numéro de la tache
+	//nécessaire lorsque la liste de tache est récupérée d'un fichier solution car elles seront dans le désordre
+	public void TriTaches(){							
+		int j=0;										
 		for(int i=0; i<this.taches.size();i++){
 			j=this.RechercheIndexTacheNumero(i+1);		//Le +1 est là car les numéros des taches commencent à 1 et non pas 0
-			this.taches.add(i, this.taches.remove(j));	//On efface la tache de sa position pour l'insérer à la place i
+			this.taches.add(i, this.taches.remove(j));	//On efface la tache de sa position pour l'insérer à la réinsérer à l'index i
 		}
 	}
 	
-	public int RechercheIndexTacheNumero(int numero){	//Fonction renvoyant l'index d'une tache dans la liste taches selon un numero de tache
+	//Fonction renvoyant l'index d'une tache dans la liste taches selon un numero de tache
+	public int RechercheIndexTacheNumero(int numero){	
 		int j=0;
-		for(int i=0; i<this.taches.size();i++){
+		for(int i=0; i<this.taches.size();i++){					//Parcourt de la liste de Taches jusqu'à trouver la Tache voulue
 			if(this.taches.get(i).getNumeroTache()==numero)
 				j=i;
 		}
 		return j;
 	}
+	
 	
 	public void LectureSolution(String fichierSolution){
 		int numero, heureDepart, heureArrivee, i=0, marker1=0, marker2=0;
@@ -292,6 +301,8 @@ public class Solution {
 		return indexTacheChoisie;
 	}
 	
+	//Calcul de coutTotal, totalIdleTime, totalOverTime, totalUnderTime, totalTaches
+	//somme des attributs des Chauffeurs
 	public void CalculerCoutTotal(){
 		for(int i=0; i<this.chauffeurs.size();i++){
 			this.coutTotal+=(this.getChauffeur(i)).getCost();
@@ -302,6 +313,8 @@ public class Solution {
 		}
 	}
 	
+	//Impression des informations de la solution en partie selon le format des fichiers solution_X.txt fournis
+	//certaines informations on été rajoutées par rapport aux fichier originaux
 	public void PrintSolution(){
 		System.out.println("**********The solution contains "+this.getNombreChauffeurs()+" driver(s) and "+this.getTotalTaches()+" tasks.**********");
 		for (int i=0; i<this.chauffeurs.size(); i++){
@@ -318,6 +331,7 @@ public class Solution {
 		System.out.println("Services de nuit : "+this.getServiceNuit());		//Ligne en plus par rapport au fichiers solution
 	}
 	
+	//Idem de PrintSolution mais renvoie le résultat sous forme de String pour pouvoir être exploité par l'interface graphique
 	public String StringSolution(){
 		String resultat="";
 		resultat=resultat+"**********The solution contains "+this.getNombreChauffeurs()+" driver(s) and "+this.getTotalTaches()+" tasks.**********"+"\n";
@@ -327,16 +341,17 @@ public class Solution {
 		resultat=resultat+"--------------------------------\n";
 		resultat=resultat+"\n";
 		resultat=resultat+"TotalCost="+this.getCoutTotal()+"\n";
-		resultat=resultat+"TotalUnderTime="+this.getUnderTime()+"\n";
-		resultat=resultat+"TotalIdleTime="+this.getIdleTime()+"\n";
-		resultat=resultat+"Services du matin: "+this.getServiceMatin()+"\n";
-		resultat=resultat+"Services du jour: "+this.getServiceJour()+"\n";
-		resultat=resultat+"Services du soir: "+this.getServiceSoir()+"\n";
-		resultat=resultat+"Services de nuit : "+this.getServiceNuit()+"\n";
+		resultat=resultat+"TotalUnderTime="+this.getUnderTime()+"\n";				//Ligne en plus par rapport au fichiers solution
+		resultat=resultat+"TotalIdleTime="+this.getIdleTime()+"\n";					//Ligne en plus par rapport au fichiers solution
+		resultat=resultat+"Services du matin: "+this.getServiceMatin()+"\n";		//Ligne en plus par rapport au fichiers solution
+		resultat=resultat+"Services du jour: "+this.getServiceJour()+"\n";			//Ligne en plus par rapport au fichiers solution
+		resultat=resultat+"Services du soir: "+this.getServiceSoir()+"\n";			//Ligne en plus par rapport au fichiers solution
+		resultat=resultat+"Services de nuit : "+this.getServiceNuit()+"\n";			//Ligne en plus par rapport au fichiers solution
 		return resultat;
 	}
 	
-	public String StringTaches(){		//Renvoie un String resultat contenant le descriptif de toutes les taches au format des fichiers solutions
+	//Renvoie sous forme de String le resultat contenant le descriptif de toutes les taches au format des fichiers solutions
+	public String StringTaches(){
 		String resultat="";
 		for (int i=0; i<this.taches.size(); i++){
 			resultat=resultat+((this.taches.get(i)).StringTache());
@@ -345,6 +360,7 @@ public class Solution {
 		return resultat;
 	}
 	
+	//Mise à jour du nombre de total des différents types de service
 	public void TypeService(Chauffeur c){
 		switch(c.getTypeService()){
 		case 1:
@@ -361,6 +377,8 @@ public class Solution {
 			break;
 		}
 	}
+	
+	//Réinitialisation de la solution et surtout des listes "chauffeurs" et "taches" 
 	
 	public void ReinitialiserSolution(){
 		coutTotal=0;
