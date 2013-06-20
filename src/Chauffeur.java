@@ -64,8 +64,8 @@ public class Chauffeur {
 			this.cost=this.underTime+this.idleTime;
 		else
 			this.cost=this.overTime+this.idleTime;
-		heureFin=this.tachesChauffeur.get(this.tachesChauffeur.size()-1).getHeureArrivee();
-		heureDepart=this.tachesChauffeur.get(0).getHeureDepart();
+		heureFin=(this.tachesChauffeur.get(this.tachesChauffeur.size()-1)).getHeureArrivee();
+		heureDepart=(this.tachesChauffeur.get(0)).getHeureDepart();
 	}
 	
 	//Ajout du Tache ˆ tachesChauffeur
