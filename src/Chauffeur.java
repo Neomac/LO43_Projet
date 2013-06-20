@@ -10,8 +10,8 @@ public class Chauffeur {
 	private int overTime;			//Temps de travail au dessus de la durée légale
 	private int idleTime;			//Temps d'inactivité du Chauffeur
 	private int cost;				//Cout du Chauffeur
-	private int heureDepart;
-	private int heureFin;
+	private int heureDepart;		//heure de départ de la première tache du Chauffeur
+	private int heureFin;			//heure d'arrivée de la dernière tache du Chauffeur
 	private int nombrePause;		//Nombre de pauses prises par le Chauffeur
 	private ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();	//Liste des taches assignées au Chauffeur dans l'ordre chronologique
 
