@@ -388,9 +388,17 @@ public class Solution {
 	}
 	
 	//Renvoie sous forme de String un horaire ˆ l'origine en minutes au format: "heure h minutes"
-	public String GetHoraire(int minutes){		//Renvoi
+	public String GetHoraire(int horaire){		//Renvoi
 		String resultat;
-		return resultat=((minutes-(minutes)%60)/60)+"h"+((minutes)%60);
+		int heures, minutes;
+		heures=(horaire-(horaire)%60)/60;
+		minutes=(horaire)%60;
+		if (minutes<10){
+			resultat=heures+"h0"+minutes;
+		}
+		else
+			resultat=heures+"h"+minutes;
+		return resultat;
 	}
 	
 	
