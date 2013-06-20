@@ -379,7 +379,7 @@ public class Solution {
 	}
 	
 	//Réinitialisation de la solution et surtout des listes "chauffeurs" et "taches" 
-	
+	//afin de pouvoir ouvrir et générer de nouvelles solutions
 	public void ReinitialiserSolution(){
 		coutTotal=0;
 		nombreChauffeurs=0;
@@ -399,11 +399,14 @@ public class Solution {
 		this.taches.clear();
 	}
 	
+	//Renvoie sous forme de String un horaire à l'origine en minutes au format: "heure h minutes"
 	public String GetHoraire(int minutes){		//Renvoi
 		String resultat;
 		return resultat=((minutes-(minutes)%60)/60)+"h"+((minutes)%60);
 	}
 	
+	
+	//Assesseurs de la classe Solution
 	public Chauffeur getChauffeur(int i){
 		return chauffeurs.get(i);
 	}

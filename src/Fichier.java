@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 public class Fichier {
 	
-	private ArrayList<Tache> TachesFichier = new ArrayList<Tache>();
+	private ArrayList<Tache> TachesFichier = new ArrayList<Tache>();	//Liste des Taches récupérées d'un fichier d'instance
 	
 	
 	/* A effacer
@@ -16,6 +16,7 @@ public class Fichier {
 	}
 	*/
 	
+	//Fonction de lecture d'un fichier d'instance
 	public  void LectureInstance(){
 		int i=1, a, b;
 		String A, B;
@@ -48,16 +49,19 @@ public class Fichier {
 			}
 		}
 	
+	//Impression du détail de la liste de Taches "tachesFichier"
 	public  void PrintArray(){
 		for (int i=0; i<this.TachesFichier.size(); i++){
 			(this.TachesFichier.get(i)).PrintTache();
 		}
 	}
-
+	
+	//Efface le contenu de la liste de Taches "tachesFichier"
 	public void ReinitialiserFichier(){
 		this.TachesFichier.clear();
 	}
 	
+	//Assesseurs de la classe Fichier
 	public Tache getTacheFichier(int i){
 		return this.TachesFichier.get(i);
 	}
