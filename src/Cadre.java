@@ -62,7 +62,7 @@ public class Cadre {
         temp.setPreferredSize(new Dimension(width,height));
         temp.setBorder(BorderFactory.createTitledBorder(titre));
         //JTextArea texte = new JTextArea();
-        Texte = new JTextArea(27,25);
+        Texte = new JTextArea(29,26);
         Texte.setEditable(false);
         temp.add(new JScrollPane(Texte));
         temp.setVisible(true);

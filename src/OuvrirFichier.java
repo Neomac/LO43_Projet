@@ -27,10 +27,11 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 	
 	public OuvrirFichier(){
 		this.setTitle("Projet LO43");
-		this.setSize(1200,600);
+		this.setSize(800,600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setLocationRelativeTo(null);
-	    this.setVisible(true);
+        this.setMinimumSize(new Dimension(800,600));
+
 		
 		/*JPanel*/ TextSolution = new JPanel(); //Panel de la zone affichage de la solution
 		
@@ -106,11 +107,11 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		/*Cadre*/ ZoneTexte_c = new Cadre(); //Cadre pour la zone de texte
 		
 		//--------D�claration des cadres pour l'onglet 1 -------------------\\
-		CoutSolution_p = CoutSolution_c.CreerCadre_1("Cout de la solution", 100, 100);
-		NbChauffeur_p = NbChauffeur_c.CreerCadre_1("Nombre de Chauffeur", 100, 100);
+		CoutSolution_p = CoutSolution_c.CreerCadre_1("Cout de la solution", 200, 200);
+		NbChauffeur_p = NbChauffeur_c.CreerCadre_1("Nombre de Chauffeur", 200, 200);
 		//CoutTotal_p = CoutTotal_c.CreerCadre_1("Cout total", 100, 100);
-		NbTache_p = NbTache_c.CreerCadre_1("Nombre de taches", 100, 100);
-		TypeService_p = TypeService_c.CreerCadre_1("Type de service", 100, 100);
+		NbTache_p = NbTache_c.CreerCadre_1("Nombre de taches", 200, 200);
+		TypeService_p = TypeService_c.CreerCadre_1("Type de service", 200, 200);
 		
 		//-------D�claration des cadres pour l'onglet 3 ---------------------\\
 		TypeService1_p = TypeService1_c.CreerCadre_1("Type de service", 100, 100);
@@ -124,7 +125,7 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		Chauffeur_cb = new JComboBox();
 		Chauffeur_cb.addItem("Pas de chauffeur.");
 		
-		TextSolution = ZoneTexte_c.CreerCadre_scrollpane("Affichage de la solution", 400, 400);
+		TextSolution = ZoneTexte_c.CreerCadre_scrollpane("Affichage de la solution", 300, 400);
 
         //Déclaration du diagramme de Gantt
         JPanel temp = new JPanel();
@@ -143,14 +144,28 @@ public class OuvrirFichier extends JFrame implements ActionListener {
         Tache_cb = new JComboBox();
         Tache_cb.addItem("Pas de tache.");
 
+        JPanel contentOnglet4 = new JPanel();
+        Onglet4.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        /*if(shouldFill){
+            c
+        }*/
 
-		Onglet1.setLayout(new GridLayout(3,2));
+        contentOnglet4.add(Tache_cb, BorderLayout.NORTH);
+        contentOnglet4.add(HeureDepart_p, BorderLayout.WEST);
+        contentOnglet4.add(HeureArrivee_p, BorderLayout.WEST);
+        contentOnglet4.add(LieuDepart_p, BorderLayout.EAST);
+        contentOnglet4.add(LieuArrivee_p, BorderLayout.EAST);
+        contentOnglet4.add(ChauffeurAssocie_p, BorderLayout.SOUTH);
 
-		Onglet1.add(CoutSolution_p);
-		Onglet1.add(NbChauffeur_p);
+
+		//Onglet1.setLayout(new GridBagLayout());
+
+		Onglet1.add(CoutSolution_p, BorderLayout.NORTH);
+		Onglet1.add(NbChauffeur_p, BorderLayout.SOUTH);
 		//Onglet1.add(CoutTotal_p);
-		Onglet1.add(NbTache_p);
-		Onglet1.add(TypeService_p);
+		Onglet1.add(NbTache_p, BorderLayout.CENTER);
+		Onglet1.add(TypeService_p, BorderLayout.WEST);
 
 		Onglet2.add(DiagGantt);
 
@@ -163,12 +178,15 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 		Onglet3.add(OverTime_p);
 		Onglet3.add(Cost_p);
 
+        /*
         Onglet4.add(Tache_cb);
 		Onglet4.add(HeureDepart_p);
 		Onglet4.add(HeureArrivee_p);
 		Onglet4.add(LieuDepart_p);
 		Onglet4.add(LieuArrivee_p);
 		Onglet4.add(ChauffeurAssocie_p);
+		*/
+        Onglet4.add(contentOnglet4);
 
 		OngletSolution.add(Onglet1, "Affichage des couts");
 		OngletSolution.add(Onglet2, "Diagramme de Gantt");
@@ -278,11 +296,12 @@ public class OuvrirFichier extends JFrame implements ActionListener {
         //TextSolution.add(new JScrollPane(Texte), BorderLayout.CENTER);
 
         Content.add(buttonPanel, BorderLayout.NORTH);
-        Content.add(TextSolution, BorderLayout.WEST);
+        Content.add(TextSolution, BorderLayout.CENTER);
         Content.add(OngletSolution, BorderLayout.EAST);
         this.getContentPane().add(buttonPanel, BorderLayout.NORTH);
         this.getContentPane().add(TextSolution, BorderLayout.WEST);
         this.getContentPane().add(OngletSolution, BorderLayout.EAST);
+        this.setVisible(true);
 
 	};
 
