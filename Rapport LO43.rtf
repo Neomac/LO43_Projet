@@ -19,7 +19,7 @@ L'objectif de ce projet est la r\'e9alisation d'un logiciel d'affichage d'emploi
 \fs28 I) Backend
 \fs24 \
 \
-(- Mise en place d'un tir pour le travail colaboratif)\
+(- Mise en place d'un git pour le travail colaboratif)\
 - Algo de lecture de fichier solution\
 - Algo de g\'e9n\'e9ration de fichier solution\
 \
@@ -35,7 +35,7 @@ L'objectif de ce projet est la r\'e9alisation d'un logiciel d'affichage d'emploi
 \fs24 \
 \
 A l'issue de ce projet, nous avons r\'e9ussi \'e0 produire une application fonctionnelle. Elle lit bien les fichier solution demand\'e9 et retranscrit les informations de celles ci dans une interface graphique. Nous avons aussi pu implementer un algorithme de cr\'e9ation de solution \'e0 partir des fichiers d'instances. cette algorithme n'est par contre pas assez optimis\'e9 donc les couts que celui ci renvoie sont sup\'e9rieur aux couts pr\'e9sent dans les solution donn\'e9s avec le sujet.\
-Nous avons aussi eu des soucis avec 'implantation du diagramme de Gantt. Celui ci fonctionne pour l'emploi du temps d'un chauffeur mais nous avons pas pu r\'e9aliser un digramme pour l'ensemble des chauffeurs.$\
+Nous avons aussi eu des soucis avec 'implantation du diagramme de Gantt. Celui ci fonctionne pour l'emploi du temps d'un chauffeur mais nous avons pas pu r\'e9aliser un digramme pour l'ensemble des chauffeurs.\
 \
 Objectif atteint, logiciel fonctionnel et travail optionnel effectu\'e9\
 \
@@ -48,6 +48,13 @@ I) Backend \
 Mes en place du git :\
 Pour pouvoir travailler plus efficacement et surtout avoir une historisation et une sauvegarde de notre travail, nous avons d\'e9cider de mettre en place un git pour notre projet. Nous avons utilis\'e9 les services du site GitHub et nous avons interfac\'e9 cela vers le plugin EGit pour eclipse.\
 Cela nous a permis de travailler chacun de notre cot\'e9 en sachant toujours que nous avions la derni\'e8re version des fichiers du projet, mais surtout d'avoir une sauvegarde \'e9tapes par \'e9tapes de l'avancement du projet.\
+\
+UML : \
+Notre mod\'e9lisation UML se r\'e9sume a trois classes. \
+Dans une premi\'e8re nous avons les chauffeurs. Ceux ci sont caract\'e9ris\'e9 par leur num\'e9ro et diverses informations sur leur temps et leur de travail.\
+A chacun de ces chauffeurs sont attribu\'e9 plusieurs taches. Celle ci sont caract\'e9ris\'e9 par leur num\'e9ro, le num\'e9ro du chauffeur auquel elle est attribu\'e9 et des informations sur sont lieu et ses horaires.\
+Enfin nous avons les solutions. Celles regroupent des chauffeurs et des taches. Elle regroupe diverses informations sur les chauffeurs et les taches qui la compose mais aussi le cout totale de celle ci.\
+Ces trois classes nous ont permis de mod\'e9liser dans sont ensemble la partie donn\'e9e du probl\'e8me. Le reste des classes concerne l'interface graphique et la lecture des fichiers de solution.\
 \
 II) Frontend\
 \
