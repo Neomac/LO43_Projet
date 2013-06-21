@@ -428,7 +428,7 @@ public class OuvrirFichier extends JFrame implements ActionListener {
 			    	ZoneTexte_c.getTexte().append("Chauffeur | Cout" + "\n");
 			    	CoutSolution_c.getTexte().append(" " + testSolution.getCoutTotal() + " ");
 			    	NbChauffeur_c.getTexte().append(" " + testSolution.getNombreChauffeurs() + " ");
-			    	NbTache_c.getTexte().append(" " + testSolution.getTotalTaches() + " ");
+			    	 NbTache_c.getTexte().append(" " + testSolution.getTotalTaches() + " ");
 			    	TypeService_c.getTexte().append("Service du matin : " + testSolution.getServiceMatin() + "\n" +
 			    									"Service de jour  : " + testSolution.getServiceJour()  + "\n" +
 			    									"Service du soir  : " + testSolution.getServiceSoir()  + "\n" +
