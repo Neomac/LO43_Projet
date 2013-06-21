@@ -114,37 +114,35 @@ public class Solution {
 		return j;
 	}
 	
-	
+	//Fonction de lecture d'un fichier de solution fourni et enregistrement des solutions dans des instances des classes Chauffeurs et Taches
 	public void LectureSolution(String fichierSolution){
 		int numero, heureDepart, heureArrivee, i=0, marker1=0, marker2=0;
 		String lieuDepart, lieuArrivee;
-		this.ReinitialiserSolution();
+		this.ReinitialiserSolution();		//On réinitialise la liste de Chauffeurs et de Taches pour ne pas les conserver à chaque fois que l'on change de fichier
 		
 		try {
-			FileInputStream fstream = new FileInputStream(fichierSolution);
+			FileInputStream fstream = new FileInputStream(fichierSolution);			//Lecture du fichier et copie dans le BufferedReader br
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			
 			String strLine, c="";
-			this.nombreChauffeurs=0;
 			
-			strLine = br.readLine();
+			strLine = br.readLine();												//Lecture du nombre total de chauffeurs sur la première ligne
 			StringTokenizer st = new StringTokenizer(strLine, " ");
+			st.nextToken();															
 			st.nextToken();
 			st.nextToken();
-			st.nextToken();
-			this.setCoutTotal(Integer.parseInt(st.nextToken()));
+			this.setNombreChauffeurs(Integer.parseInt(st.nextToken()));	
 			
 			strLine = br.readLine();
 			
-			while(marker2==0){
+			while(marker2==0){		//Boucle de lecture de chaque chauffeur, marker2 est mis à 1 une fois arrivé à la fin des chauffeurs
 				i++;
-				Chauffeur nouveauChauffeur = new Chauffeur();
+				Chauffeur nouveauChauffeur = new Chauffeur();		//Création d'un nouveau chauffeur
 				nouveauChauffeur.setNumeroChauffeur(i);
-				this.nombreChauffeurs++;
-				marker1=0;
+				marker1=0;											//Réinitialisation du marqueur d'arrêt de la boucle de lecture de taches
 				
-				strLine = br.readLine();
+				strLine = br.readLine();							//Lecture de workerTimeSum du Chauffeur
 				strLine = br.readLine();
 				nouveauChauffeur.setWorkerTimeSum(Integer.parseInt(strLine.substring(14)));
 				
@@ -153,140 +151,152 @@ public class Solution {
 				st.nextToken();
 				st.nextToken();
 				
-				if (nouveauChauffeur.getWorkerTimeSum()<this.getDureeLegale()){
+				if (nouveauChauffeur.getWorkerTimeSum()<this.getDureeLegale()){				//Lecture de underTime ou overTime selon la situation
 					nouveauChauffeur.setUnderTime(Integer.parseInt(st.nextToken()));
-					this.totalUnderTime+=nouveauChauffeur.getUnderTime();
+					this.totalUnderTime+=nouveauChauffeur.getUnderTime();					//Mise à jour de totalUnderTime de la Solution
 				}
 				else{
 					nouveauChauffeur.setOverTime(Integer.parseInt(st.nextToken()));
-					this.totalOverTime+=nouveauChauffeur.getOverTime();
+					this.totalOverTime+=nouveauChauffeur.getOverTime();						//Mise à jour de totalOverTime de la Solution
 				}
 				
-				strLine = br.readLine();
+				strLine = br.readLine();													//Lecture de idleTime du Chauffeur
 				st = new StringTokenizer(strLine, " ");
 				st.nextToken();
 				st.nextToken();
 				nouveauChauffeur.setIdleTime(Integer.parseInt(st.nextToken()));
-				this.totalIdleTime+=nouveauChauffeur.getIdleTime();
+				this.totalIdleTime+=nouveauChauffeur.getIdleTime();							//Mise à jour de totalIdleTime de la Solution
 				
 				strLine = br.readLine();
-				nouveauChauffeur.setCost(Integer.parseInt(strLine.substring(5)));
+				nouveauChauffeur.setCost(Integer.parseInt(strLine.substring(5)));			//Lecture du cout du Chauffeur
 								
 				strLine = br.readLine();
 				st = new StringTokenizer(strLine, " ");
 				
-				while(marker1==0){
-					this.totalTaches++;
+				while(marker1==0){										//Boucle de lecture des Taches du Chauffeur
+					this.totalTaches++;									//Mise à jour du nombre total de taches
 					st = new StringTokenizer(strLine, "\t");
 					c=st.nextToken();
-					numero=Integer.parseInt(c.substring(5));
+					numero=Integer.parseInt(c.substring(5));			//Récupération du numéro de la Tache
 						
 					c=st.nextToken();
-					heureDepart=Integer.parseInt(c.substring(10));
+					heureDepart=Integer.parseInt(c.substring(10));		//Récupération de l'heure de départ de la Tache
 						
 					c=st.nextToken();
-					heureArrivee=Integer.parseInt(c.substring(11, c.length()-2));
-					lieuDepart=c.substring(c.length()-2, c.length()-1);
-					lieuArrivee=c.substring(c.length()-1);
-					Tache nouvelleTache = new Tache(numero, i, heureDepart, heureArrivee, lieuDepart,lieuArrivee);
-					nouveauChauffeur.AjouterTacheChauffeur(nouvelleTache);
-					this.taches.add(nouvelleTache);
+					heureArrivee=Integer.parseInt(c.substring(11, c.length()-2));		//Récupération de l'heure d'arrivée de la Tache
+					lieuDepart=c.substring(c.length()-2, c.length()-1);					//Récupération du lieu de départ de la Tache
+					lieuArrivee=c.substring(c.length()-1);								//Récupération du lieu d'arrivée de la Tache
+					Tache nouvelleTache = new Tache(numero, i, heureDepart, heureArrivee, lieuDepart,lieuArrivee);	//Création d'une nouvelle Tache avec les informations récupérées
+					nouveauChauffeur.AjouterTacheChauffeur(nouvelleTache);				//Ajout de la Tache à la liste de Taches du Chauffeur
+					this.taches.add(nouvelleTache);										//Ajout de la Tache à la liste de Taches de la Solution
 					
 					strLine=br.readLine();
-					if(strLine.compareTo("")!=0){
-						marker1=1;
-						if(strLine.compareTo("--------------------------------")==0){
-							marker1=marker2=1;
+					if(strLine.compareTo("")!=0){										//Boucle de Test afin de savoir si on est en fin de liste de Taches
+						marker1=1;														//marker1 est mis à 1 afin de sortir de la boucle de lecture des Taches
+						if(strLine.compareTo("--------------------------------")==0){	//Boucle de Test afin de savoir si on est en fin de liste de Chauffeurs
+							marker2=1;													//marker2 est mis à 1 afin de sortir de la boucle de lecture des Chauffeurs
 						}
 					}
-					else{
+					else{																//Sinon on saute une ligne et on passe à la Tache suivante
 						strLine=br.readLine();
 					}
 				}
-				nouveauChauffeur.TypeDeService(nouveauChauffeur.getTache(0));
-				this.TypeService(nouveauChauffeur);
-				this.chauffeurs.add(nouveauChauffeur);
-				nouveauChauffeur.CalculerCout(this);
+																						//Fin de la lecture des Taches
+				nouveauChauffeur.TypeDeService(nouveauChauffeur.getTache(0));			//Calcul du type de servce du Chauffeur
+				this.TypeService(nouveauChauffeur);										//Mise à jour du nombre de chaque type de service de la Solution
+				this.chauffeurs.add(nouveauChauffeur);									//Ajout du chauffeur à la liste de Chauffeurs de la Solution
+				nouveauChauffeur.CalculerCout(this);									//Calcul du cout et de différents attributs du Chauffeur
 			}
+																						//Fin de la lecture des Chauffeurs
 			strLine = br.readLine();
 			strLine = br.readLine();
-			this.coutTotal=Integer.parseInt(strLine.substring(10));
-			this.TriTaches();
+			this.coutTotal=Integer.parseInt(strLine.substring(10));						//Lecture du cout total de la Solution
+			this.TriTaches();															//Tri de la liste de Taches de la Solution comme elles n'ont pas été récupérées dans l'ordre
 			in.close();
 			
-		} catch (Exception e) {
+		} catch (Exception e) {															//Catch en cas d'erreur dans la lecture du fichier
 			System.out.println("Erreur de lecture du fichier solution!");
 		}
 	}
 	
+	//Fonction de création de solution à partir d'un fichier d'instance
 	public void GenerationSolution(Fichier fichierInstance){
 		int i=0, pause=0, marqueurArret=0, marqueurChoix=0;
-		this.ReinitialiserSolution();
-		this.CopieTaches(fichierInstance);
-		while(!((fichierInstance.getTaches()).isEmpty())){
+		this.ReinitialiserSolution();							//On réinitialise la liste de Chauffeurs et de Taches pour ne pas les conserver à chaque fois que l'on change de fichier
+		this.CopieTaches(fichierInstance);						//Copie de la liste de Taches du fichier d'instance dans celle de la Solution
+		while(!((fichierInstance.getTaches()).isEmpty())){		//La boucle de création de solution ne s'arrêtera que lorsque toutes les solutions auront été attribuées,
+																//les taches sont effacées de la liste du fichier d'instance dès qu'elles sont assignées à un Chauffeur
 			i++;
-			Chauffeur nouveauChauffeur = new Chauffeur();
-			nouveauChauffeur.setNumeroChauffeur(i);
-			this.setNombreChauffeurs(i);
-			marqueurArret=0;
-			while(((nouveauChauffeur.getWorkerTimeSum())<(this.getDureeLegale())) && marqueurArret==0){
-				pause=nouveauChauffeur.getNombrePause();
-				if((nouveauChauffeur.getWorkerTimeSum())>(240+240*pause)){
-					if(nouveauChauffeur.getNombrePause()==0){
-						marqueurChoix=ChoisirProchaineTache(nouveauChauffeur, fichierInstance, this.getDureePauseLegale());
-						nouveauChauffeur.setNombrePause(nouveauChauffeur.getNombrePause()+1);
+			Chauffeur nouveauChauffeur = new Chauffeur();		//Création d'un nouveau Chauffeur
+			nouveauChauffeur.setNumeroChauffeur(i);				//Assignation d'un numéro au Chauffeur grâce à la variable i incrémentée à chaque itération de la boucle while
+			
+			marqueurArret=0;									//Réinitialisation du marqueur d'arrêt de la boucle d'ajout de Taches au nouveau Chaffeur
+			while(((nouveauChauffeur.getWorkerTimeSum())<(this.getDureeLegale())) && marqueurArret==0){		//Boucle d'ajout de Tache au nouveau Chauffeur, la boucle s'arrêtera si le chauffeur 
+																											//a dépassé la durée maximale de travail ou si le marqueur d'arrêt est à 1
+				pause=nouveauChauffeur.getNombrePause();						//Récupération du nombre de pauses déjà effectuées par le Chauffeur
+				if((nouveauChauffeur.getWorkerTimeSum())>(240+240*pause)){		//Si le Chauffeur a travaillé plus de 4h depuis sa dernière pause on effectue:
+					if(nouveauChauffeur.getNombrePause()==0){					//Si le Chauffeur n'a toujours pas pris de pause
+						marqueurChoix=ChoisirProchaineTache(nouveauChauffeur, fichierInstance, this.getDureePauseLegale());		//Choix de la prochaine Tache du Chauffeur avec au moins 30min de pause
+						nouveauChauffeur.setNombrePause(1);						//Mise à jour du nombre de pause effectuées par le chauffeur
 					}
-					else{
-						marqueurChoix=ChoisirProchaineTache(nouveauChauffeur, fichierInstance, this.getDureePauseSecondaire());
-						nouveauChauffeur.setNombrePause(nouveauChauffeur.getNombrePause()+1);
+					else{																			//Si le Chauffeur a déjà fait au moins 1 pause
+						marqueurChoix=ChoisirProchaineTache(nouveauChauffeur, fichierInstance, this.getDureePauseSecondaire());	//Choix de la prochaine Tache du Chauffeur avec au moins 20min de pause
+						nouveauChauffeur.setNombrePause(nouveauChauffeur.getNombrePause()+1);		//Mise à jour du nombre de pause effectuées par le chauffeur
 					}
 				}
-				else{
+				else{																	//Sinon choisir la prochaine Tache avec le moins de temps d'attente possible
 					marqueurChoix=ChoisirProchaineTache(nouveauChauffeur, fichierInstance, 0);
 				}
-				if(marqueurChoix!=0){
-					nouveauChauffeur.ajouterTache(fichierInstance, marqueurChoix-1);
+				if(marqueurChoix!=0){													//Si une Tache a été choisie l'ajouter à la liste de taches du Chauffeur, si aucune Tache ne l'a été ChoisirProchaineTache renvoie 0
+					nouveauChauffeur.ajouterTache(fichierInstance, marqueurChoix-1);	//Comme ChoisirProchaineTache renvoie 0 quand elle ne choisit pas de Tache l'index de la Tache choisie renvoyé est incrémenté à chaque fois,
+																						//il faut donc le décrémenter lorsque l'on veut ajouter la Tache
+				}							
+				if(((nouveauChauffeur.getWorkerTimeSum())>(this.getDureeLegale())) || marqueurChoix==0){	//Si le Chauffeur a dépassé la durée légale de travail ou si aucune Tache n'a été trouvé on arrête de lui ajouter des Taches
+					marqueurArret=1;							//Mise à 1 du marqueur d'arrêt de la boucle
+					this.TypeService(nouveauChauffeur);			//Mise à jour du nombre de chaque service de la Solution
+					this.chauffeurs.add(nouveauChauffeur);		//Ajout du chauffeur à la liste de Chauffeurs de la Solution
+					nouveauChauffeur.CalculerCout(this);		//Calcul du cout du Chauffeur
 				}
-				if(((nouveauChauffeur.getWorkerTimeSum())>(this.getDureeLegale())) || marqueurChoix==0){
-					marqueurArret=1;
-					this.TypeService(nouveauChauffeur);
-					this.chauffeurs.add(nouveauChauffeur);
-					nouveauChauffeur.CalculerCout(this);
-				}
-			}
-		}
-		this.CalculerCoutTotal();
+			}													//Fin de la boucle de création d'un Chauffeurs
+		}														//Fin de la boucle d'ajouts de Chauffeurs à la liste
+		this.setNombreChauffeurs(i);							//Calcul du nombre total de Chauffeurs de la Solution
+		this.CalculerCoutTotal();								//Calcul du cout total de la Solution
 	}
 	
+	//Fonction choississant la prochaine Tache possible du Chauffeur c selon la durée de l'éventuelle pause à prendre
+	//La fonction renvoie 0 si aucune Tache n'a été choisie et sinon l'index de la Tache choisie
+	//or comme les index commencent à 0 le résultat est incrémenté pour que la première Tache ne soit pas ignorée
 	public int ChoisirProchaineTache(Chauffeur c, Fichier fichierInstance, int dureePause){
-		int indexTacheChoisie, heureTacheChoisie, heureTachePrecedente;
+		int indexTacheChoisie, heureTacheChoisie, heureTachePrecedente;		//Tampons pour les boucles de choix de la meilleure Tache
+																			//heureTachePrécédente est utilisée pour assigner un nouvelle tache après la dernière   
 		String lieuTachePrecedente="";
 		indexTacheChoisie=heureTacheChoisie=heureTachePrecedente=0;
 		
-		if ((c.getTachesChauffeur()).isEmpty()){	//Si ceci est la première tache de la journée du chauffeur on prend la première tache disponible
-			heureTacheChoisie=(fichierInstance.getTacheFichier(0)).getHeureDepart();
-			heureTachePrecedente=0;
+		if ((c.getTachesChauffeur()).isEmpty()){										//Si ceci est la première tache de la journée du chauffeur on prendra la première Tache de la liste(chronologiquement parlant)
+			heureTacheChoisie=(fichierInstance.getTacheFichier(0)).getHeureDepart(); 	//Récupération des informations de la première Tache
+			heureTachePrecedente=0;														//heureTachePrécédente est mise à 0 afin de choisir n'importe quelle Tache
 			indexTacheChoisie=1;
-			for (int i=1; i<(fichierInstance.getTaches().size()); i++){
-				if(heureTacheChoisie>(fichierInstance.getTacheFichier(i)).getHeureDepart()){
-					indexTacheChoisie=i+1;
-					heureTacheChoisie=(fichierInstance.getTacheFichier(i)).getHeureDepart();
+			for (int i=1; i<(fichierInstance.getTaches().size()); i++){							//Parcourt de la liste de Tache
+				if(heureTacheChoisie>(fichierInstance.getTacheFichier(i)).getHeureDepart()){	//Si la Tache commence plus tôt que celle déjà choisie alors elle devient la nouvelle Tache choisie
+					indexTacheChoisie=i+1;														//Incrémentation de l'index pour ne pas avoir 0 en sortie
+					heureTacheChoisie=(fichierInstance.getTacheFichier(i)).getHeureDepart();	//Mise à jour du tampon heureTacheChoisie
 				}
 			}
-			c.TypeDeService(fichierInstance.getTacheFichier(indexTacheChoisie-1));
+			c.TypeDeService(fichierInstance.getTacheFichier(indexTacheChoisie-1));				//Calcul du type de service du Chauffeur comme c'est sa première Tache
 		}
-		else{
-			heureTachePrecedente=(c.getTache((c.getTachesChauffeur()).size()-1)).getHeureArrivee();
-			lieuTachePrecedente=(c.getTache((c.getTachesChauffeur()).size()-1)).getLieuArrivee();
-			heureTacheChoisie=1500;
-			for (int i=0; i<(fichierInstance.getTaches().size()); i++){
+		else{																							//Sinon on choisie une autre Tache adéquate
+			heureTachePrecedente=(c.getTache((c.getTachesChauffeur()).size()-1)).getHeureArrivee();		//Récupération de l'heure d'arrivée de la Tache précédente du Chauffeur
+			lieuTachePrecedente=(c.getTache((c.getTachesChauffeur()).size()-1)).getLieuArrivee();		//Récupération du lieu d'arrivée de la Tache précédente du Chauffeur
+			heureTacheChoisie=1500;																		//Initialisation de cette variable à une très haute valeur
+			for (int i=0; i<(fichierInstance.getTaches().size()); i++){									//Parcourt de la liste de Tache
+				//Si le lieu de départ de la Tache est le même que le lieu d'arrivée précédent et si la Tache commence après la fin de la Tache précédente et si le temps d'attente entre les deux est suffisant pour l'éventuel pause on choisie la Tache
 				if(lieuTachePrecedente.equals((fichierInstance.getTacheFichier(i)).getLieuDepart()) && heureTacheChoisie>(fichierInstance.getTacheFichier(i)).getHeureDepart() && (fichierInstance.getTacheFichier(i)).getHeureDepart()-heureTachePrecedente>dureePause){
-					indexTacheChoisie=i+1;
-					heureTacheChoisie=(fichierInstance.getTacheFichier(i)).getHeureDepart();
+					indexTacheChoisie=i+1;														//Incrémentation de l'index pour ne pas avoir 0 en sortie
+					heureTacheChoisie=(fichierInstance.getTacheFichier(i)).getHeureDepart();	//Mise à jour du tampon heureTacheChoisie
 				}
 			}
 		}
-		return indexTacheChoisie;
+		return indexTacheChoisie;	//On renvoie l'index de la Tache choisie, si aucune Tache ne l'a été alors cette variable n'a pas été modifiée et on renvoie 0
 	}
 	
 	//Calcul de coutTotal, totalIdleTime, totalOverTime, totalUnderTime, totalTaches
