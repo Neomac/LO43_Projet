@@ -1,13 +1,15 @@
 //Lecture du fichier d'instance
 
-import java.io.*;  // Test pour GitHub
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Vector;
 import java.util.StringTokenizer;
 
 public class Fichier {
 	
-	private ArrayList<Tache> TachesFichier = new ArrayList<Tache>();	//Liste des Taches rŽcupŽrŽes d'un fichier d'instance
+	private ArrayList<Tache> TachesFichier = new ArrayList<Tache>();	//Liste des Taches rï¿½cupï¿½rï¿½es d'un fichier d'instance
 	
 	
 	/* A effacer
@@ -17,12 +19,12 @@ public class Fichier {
 	*/
 	
 	//Fonction de lecture d'un fichier d'instance
-	public  void LectureInstance(){
+	public  void LectureInstance(String fichierInstance){
 		int i=1, a, b;
 		String A, B;
 		this.ReinitialiserFichier();
 			try {
-				FileInputStream fstream = new FileInputStream("Instance_1.txt");
+				FileInputStream fstream = new FileInputStream(fichierInstance);
 				DataInputStream in = new DataInputStream(fstream);
 				BufferedReader br = new BufferedReader(new InputStreamReader(in));
 				String strLine;
@@ -49,7 +51,7 @@ public class Fichier {
 			}
 		}
 	
-	//Impression du dŽtail de la liste de Taches "tachesFichier"
+	//Impression du dï¿½tail de la liste de Taches "tachesFichier"
 	public  void PrintArray(){
 		for (int i=0; i<this.TachesFichier.size(); i++){
 			(this.TachesFichier.get(i)).PrintTache();

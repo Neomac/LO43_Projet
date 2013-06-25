@@ -11,7 +11,7 @@ public class FenetreChauffeur extends JFrame {
 		    this.setTitle("JTable");
 		    this.setSize(300, 120);
 
-            String fichierSolution = "Solution_1.txt";
+            String fichierSolution = "Solution_2.txt";
             Solution testSolution = new Solution();
             testSolution.LectureSolution(fichierSolution);
 		 
