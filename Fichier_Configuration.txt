@@ -1,3 +1,0 @@
-DureePauseLegale= 30
-DureeLegaleTravail= 480
-DureeMaximumTravail= 600

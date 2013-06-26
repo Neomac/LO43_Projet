@@ -71,10 +71,7 @@ public class Fichier {
 	public  ArrayList<Tache> getTaches() {
 		return TachesFichier;
 	}
-	public  void setTaches(ArrayList<Tache> taches) {
-		TachesFichier = taches;
-	}
-	
-	
+
+
 }
 

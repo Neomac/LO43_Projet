@@ -11,7 +11,6 @@ public class Cadre {
         temp.setBackground(Color.white);
         temp.setPreferredSize(new Dimension(width,height));
         temp.setBorder(BorderFactory.createTitledBorder(titre));
-        //JTextArea texte = new JTextArea();
         Texte = new JTextArea();
         Texte.setEditable(false);
         temp.add(Texte);
@@ -24,7 +23,6 @@ public class Cadre {
         temp.setBackground(Color.white);
         temp.setPreferredSize(new Dimension(width,height));
         temp.setBorder(BorderFactory.createTitledBorder(titre));
-        //JTextArea texte = new JTextArea();
         Texte = new JTextArea(29,26);
         Texte.setEditable(false);
         temp.add(new JScrollPane(Texte));

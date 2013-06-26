@@ -1,14 +1,12 @@
-import java.math.*;
-
 public class Tache {
 	private int numeroTache;
-	private int numeroChauffeur;				//Numro du chauffeur auquel la tache est assigne, par dfaut ˆ 0
+	private int numeroChauffeur;				//Numï¿½ro du chauffeur auquel la tache est assignï¿½e, par dï¿½faut ï¿½ 0
 	private int HeureDepart; 	//En minutes
 	private int HeureArrivee;	//En minutes
 	private String LieuDepart;	
 	private String LieuArrivee;
 	
-	//Constructeur par dfaut de Tache
+	//Constructeur par dï¿½faut de Tache
 	public Tache(){
 		numeroChauffeur=numeroChauffeur=HeureDepart = HeureArrivee = 0;
 		LieuDepart = LieuArrivee = "";
@@ -17,7 +15,7 @@ public class Tache {
 	//Constructeur de Tache
 	public Tache(int _numeroTache,int _numeroChauffeur, int _heureDepart, int _heureArrivee, String _lieuDepart, String _lieuArrivee) {
 		numeroTache = _numeroTache;
-		numeroChauffeur = _numeroChauffeur;		//Mettre ˆ 0 si un chauffeur n'est pas attribu
+		numeroChauffeur = _numeroChauffeur;		//Mettre ï¿½ 0 si un chauffeur n'est pas attribuï¿½
 		HeureDepart = _heureDepart;
 		HeureArrivee = _heureArrivee;
 		LieuDepart = _lieuDepart;
@@ -29,29 +27,17 @@ public class Tache {
 		System.out.println("Task:"+getNumeroTache()+"\tstartTime:"+getHeureDepart()+"\tfinishTime:"+getHeureArrivee()+getLieuDepart()+getLieuArrivee());
 	}
 	
-	//Renvoie sous forme de String les mmes informations que la fonction PrintTache, utilis pour afficher dans l'interface graphique
+	//Renvoie sous forme de String les mï¿½mes informations que la fonction PrintTache, utilisï¿½ pour afficher dans l'interface graphique
 	public String StringTache(){
 		return "Task:"+getNumeroTache()+"\tstartTime:"+getHeureDepart()+"\tfinishTime:"+getHeureArrivee()+getLieuDepart()+getLieuArrivee()+"\n";
 	}
-	
-	//Idem que StringTache mais renvoie en plus le numro du Chauffeur assign ˆ la Tache
-	public String StringTacheChauffeur(){
-		return "Task:"+getNumeroTache()+"\tChauffeur"+getNumeroChauffeur()+"\tstartTime:"+getHeureDepart()+"\tfinishTime:"+getHeureArrivee()+getLieuDepart()+getLieuArrivee()+"\n";
-	}
-	
-	//Renvoie le Chauffeur associ ˆ la Tache de la solution
-	public Chauffeur getChauffeurTache(Solution solution){
-		return solution.getChauffeur(this.numeroChauffeur-1);
-	}
-	
-	//Assesseurs de Tache
+
+    //Assesseurs de Tache
 	public int getNumeroTache() {
 		return numeroTache;
 	}
-	public void setNumeroTache(int numeroTache) {
-		this.numeroTache = numeroTache;
-	}
-	public int getHeureDepart() {
+
+    public int getHeureDepart() {
 		return HeureDepart;
 	}
 	public int getHeureArrivee() {
@@ -63,23 +49,9 @@ public class Tache {
 	public String getLieuArrivee() {
 		return LieuArrivee;
 	}
-	public void setHeureDepart(int heureDepart) {
-		HeureDepart = heureDepart;
-	}
-	public void setHeureArrivee(int heureArrivee) {
-		HeureArrivee = heureArrivee;
-	}
-	public void setLieuDepart(String lieuDepart) {
-		LieuDepart = lieuDepart;
-	}
-	public void setLieuArrivee(String lieuArrivee) {
-		LieuArrivee = lieuArrivee;
-	}
-	public int getNumeroChauffeur() {
+
+    public int getNumeroChauffeur() {
 		return numeroChauffeur;
 	}
-	public void setNumeroChauffeur(int numeroChauffeur) {
-		this.numeroChauffeur = numeroChauffeur;
-	}
-	
+
 }

@@ -1,21 +1,19 @@
 import java.util.ArrayList;
 
-//Commit Test 2
-
 public class Chauffeur {
 	private int typeService;		//Type de service, 1: matin, 2: jour, 3: soir, 4: noir
-	private int numeroChauffeur;	//Numro du Chauffeur, valeur minimale: 1, diffrent de l'index dans "chauffeurs" de la classe Solution
+	private int numeroChauffeur;	//Numï¿½ro du Chauffeur, valeur minimale: 1, diffï¿½rent de l'index dans "chauffeurs" de la classe Solution
 	private int workerTimeSum;		//Temps de travail total
-	private	int underTime;			//Temps de travail en dessous de la dure lgale
-	private int overTime;			//Temps de travail au dessus de la dure lgale
-	private int idleTime;			//Temps d'inactivit du Chauffeur
+	private	int underTime;			//Temps de travail en dessous de la durï¿½e lï¿½gale
+	private int overTime;			//Temps de travail au dessus de la durï¿½e lï¿½gale
+	private int idleTime;			//Temps d'inactivitï¿½ du Chauffeur
 	private int cost;				//Cout du Chauffeur
-	private int heureDepart;		//heure de dpart de la premire tache du Chauffeur
-	private int heureFin;			//heure d'arrive de la dernire tache du Chauffeur
+	private int heureDepart;		//heure de dï¿½part de la premiï¿½re tache du Chauffeur
+	private int heureFin;			//heure d'arrivï¿½e de la derniï¿½re tache du Chauffeur
 	private int nombrePause;		//Nombre de pauses prises par le Chauffeur
-	private ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();	//Liste des taches assignes au Chauffeur dans l'ordre chronologique
+	private ArrayList<Tache> tachesChauffeur = new ArrayList<Tache>();	//Liste des taches assignï¿½es au Chauffeur dans l'ordre chronologique
 
-	//Constructeur par dfaut de Chauffeur
+	//Constructeur par defaut de Chauffeur
 	public Chauffeur(){
 		typeService=0;
 		numeroChauffeur=0;
@@ -38,27 +36,27 @@ public class Chauffeur {
 		cost=_cost;
 	}
 	
-	//Ajoute en fin de liste une tache au chauffeur et modifie workerTimeSum et idleTime en consquence
+	//Ajoute en fin de liste une tache au chauffeur et modifie workerTimeSum et idleTime en consequence
 	public void ajouterTache(Fichier fichierInstance, int indexTache){ //Ajoute la tache numTache du fichier d'instance au chauffeur c et calcul workerTimeSum et idleTime
 		this.AjouterTacheChauffeur(fichierInstance.getTacheFichier(indexTache));
-		if(this.getWorkerTimeSum()==0) //Mise ˆ jour de workerTimeSum, selon si c'est la premire Tache du Chauffeur ou non
+		if(this.getWorkerTimeSum()==0) //Mise a jour de workerTimeSum, selon si c'est la premiere Tache du Chauffeur ou non
 			this.setWorkerTimeSum((fichierInstance.getTacheFichier(indexTache)).getHeureArrivee()-(fichierInstance.getTacheFichier(indexTache)).getHeureDepart());
 		else
 			this.setWorkerTimeSum(this.getWorkerTimeSum()+((fichierInstance.getTacheFichier(indexTache)).getHeureArrivee()-(this.getTache(this.getTachesChauffeur().size()-2)).getHeureArrivee()));
-		if(this.getTachesChauffeur().size()>1) //Mise ˆ jour de idleTime si ce n'est pas sa premire Tache.
+		if(this.getTachesChauffeur().size()>1) //Mise a jour de idleTime si ce n'est pas sa premiere Tache.
 			this.setIdleTime(this.getIdleTime()+(fichierInstance.getTacheFichier(indexTache)).getHeureDepart()-(this.getTache((this.getTachesChauffeur()).size()-2)).getHeureArrivee());
-		(fichierInstance.getTaches()).remove(indexTache); //Efface la tache de la liste du fichier d'instance pour qu'elle ne soit pas ajout autre part
+		(fichierInstance.getTaches()).remove(indexTache); //Efface la tache de la liste du fichier d'instance pour qu'elle ne soit pas ajouter autre part
 	}
 	
 	//Calcul du cout de Chauffeur en fonction 
 	public void CalculerCout(Solution solution){
 		int differenceTemps;
-		differenceTemps=solution.getDureeLegale()-this.workerTimeSum; //Calcul de la difference de temps de travail par rapport ˆ dureeLegale
-		if(differenceTemps>=0)					//Calcul de overTime ou de underTime en consquence
+		differenceTemps=solution.getDureeLegale()-this.workerTimeSum; //Calcul de la difference de temps de travail par rapport a la dureeLegale
+		if(differenceTemps>=0)					//Calcul de overTime ou de underTime en consequence
 			this.underTime=differenceTemps;
 		else
 			this.overTime=(-1)*differenceTemps;
-		if(this.nombrePause!=0)			//Calcul du idleTime dfinitif en prenant en compte les pauses, la premire correspond ˆ la pause principale et les autres aux pauses ventuelles
+		if(this.nombrePause!=0)			//Calcul du idleTime definitif en prenant en compte les pauses, la premiere correspond a la pause principale et les autres aux pauses eventuelles
 			this.idleTime=this.idleTime-solution.getDureePauseLegale()-(this.nombrePause-1)*solution.getDureePauseSecondaire();
 		if(this.underTime!=0)			//Calcul du cout selon idleTime et overTime ou underTime
 			this.cost=this.underTime+this.idleTime;
@@ -68,13 +66,13 @@ public class Chauffeur {
 		heureDepart=(this.tachesChauffeur.get(0)).getHeureDepart();
 	}
 	
-	//Ajout du Tache ˆ tachesChauffeur
+	//Ajout du Tache ï¿½ tachesChauffeur
 	public void AjouterTacheChauffeur(Tache T){
 		this.tachesChauffeur.add(T);
 	}
 	
 	//Impression des informations de Chauffeur en partie selon le format des fichiers solution_X.txt fournis
-	//certaines informations on t rajoutes par rapport aux fichier originaux
+	//certaines informations on ete rajoutees par rapport aux fichier originaux
 	public void PrintChauffeur(Solution solution){
 		int i;
 		System.out.println("----Worker "+getNumeroChauffeur()+"'s task(s)----");
@@ -95,7 +93,7 @@ public class Chauffeur {
 		(this.tachesChauffeur.get(i++)).PrintTache();
 	}
 	
-	//Idem que PrintChauffeur mais renvoie le rsultat sous forme de String pour pouvoir tre exploit par l'interface graphique
+	//Idem que PrintChauffeur mais renvoie le resultat sous forme de String pour pouvoir etre exploite par l'interface graphique
 	public String StringChauffeur(Solution solution){
 		String resultat="";
 		int i;
@@ -118,20 +116,20 @@ public class Chauffeur {
 		return resultat;
 	}
 	
-	//Dtermine le type de service du Chauffeur
+	//Determine le type de service du Chauffeur
 	public void TypeDeService(Tache t){
 		int heure=t.getHeureDepart();
 		if (heure >= 300 && heure <= 419)	
-			this.typeService=1;				//Service du matin, numrotation: 1
+			this.typeService=1;				//Service du matin, numerotation: 1
 		else if (heure >= 420 && heure <= 1019)
-			this.typeService=2;				//Service du jour, numrotation: 2
+			this.typeService=2;				//Service du jour, numerotation: 2
 		else if (heure >= 1020 && heure <= 1199)
-			this.typeService=3;				//Service du soir, numrotation: 3
+			this.typeService=3;				//Service du soir, numerotation: 3
 		else if (heure >= 1200 && heure <= 1440)
-			this.typeService=4;				//Service de nuit, numrotation: 4
+			this.typeService=4;				//Service de nuit, numerotation: 4
 	}
 	
-	//Renvoie le type de service sous forme de String pour tre utilis par l'interface graphique
+	//Renvoie le type de service sous forme de String pour ï¿½tre utilisï¿½ par l'interface graphique
 	public String PrintService(){
 		String result="";
 		if(this.getTypeService()==1)
@@ -145,7 +143,7 @@ public class Chauffeur {
 		return result;
 	}
 	
-	//Renvoie sous forme de String les numros des taches assignes au Chauffeur sous forme de String pour tre utilis par l'interface graphique
+	//Renvoie sous forme de String les numï¿½ros des taches assignï¿½es au Chauffeur sous forme de String pour ï¿½tre utilisï¿½ par l'interface graphique
 	public String getNumerosTaches(){
 		String resultat="";
 		for(int i=0; i<this.tachesChauffeur.size();i++){
@@ -172,13 +170,8 @@ public class Chauffeur {
 	public ArrayList<Tache> getTachesChauffeur() {
 		return tachesChauffeur;
 	}
-	public void setTypeService(int typeService) {
-		this.typeService = typeService;
-	}
-	public void setTachesChauffeur(ArrayList<Tache> tachesChauffeur) {
-		this.tachesChauffeur = tachesChauffeur;
-	}
-	public int getWorkerTimeSum() {
+
+    public int getWorkerTimeSum() {
 		return workerTimeSum;
 	}
 	public int getUnderTime() {
@@ -231,14 +224,5 @@ public class Chauffeur {
 		return heureFin;
 	}
 
-	public void setHeureDepart(int heureDepart) {
-		this.heureDepart = heureDepart;
-	}
 
-	public void setHeureFin(int heureFin) {
-		this.heureFin = heureFin;
-	}
-	
-	
-	
 }

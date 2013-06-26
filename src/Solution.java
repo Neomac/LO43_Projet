@@ -535,15 +535,7 @@ public class Solution {
 		this.totalTaches = totalTaches;
 	}
 
-	public int getTotalOverTime() {
-		return totalOverTime;
-	}
-
-	public void setTotalOverTime(int totalOverTime) {
-		this.totalOverTime = totalOverTime;
-	}
-
-	public int getDureePauseSecondaire() {
+    public int getDureePauseSecondaire() {
 		return dureePauseSecondaire;
 	}
 

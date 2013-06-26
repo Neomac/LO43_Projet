@@ -5,8 +5,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-//Commit Test 2
-
 public class Instance {
 	
 	private ArrayList<Tache> tachesInstance = new ArrayList<Tache>();

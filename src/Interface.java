@@ -3,7 +3,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.File;
 
 public class Interface extends JFrame implements ActionListener {
 	private JFileChooser OpenFile;
@@ -17,8 +17,11 @@ public class Interface extends JFrame implements ActionListener {
 	private JComboBox Chauffeur_cb, Tache_cb;
 	private Solution testSolution;
     private JCheckBox TexteSimplifie, TexteComplet;
+    private String nomFichier;
+    private JButton DiagGantt;
 	
 	int marqueur = 0;
+    int numeroChauffeur = 0;
 	
 	
 	public Interface(){
@@ -142,16 +145,33 @@ public class Interface extends JFrame implements ActionListener {
         Heure_p.add(HeureChauffeurDepart_p);
         Heure_p.add(HeureChauffeurArrivee_p);
 
+        DiagGantt = new JButton("Generer diagramme de Gantt");
+
+        DiagGantt.setEnabled(false);
+
+        DiagGantt.setIcon(new ImageIcon(".\\open-source-icons\\PNG\\purple\\bar-chart.png"));
+        DiagGantt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //To change body of implemented methods use File | Settings | File Templates.
+                Gantt diag = new Gantt(nomFichier,numeroChauffeur);
+            }
+        });
+
         Container pane3 = new Container();
         pane3.setLayout(new BoxLayout(pane3, BoxLayout.Y_AXIS));
-		pane3.add(Chauffeur_cb);
+        DiagGantt.setAlignmentX(pane3.CENTER_ALIGNMENT);
+        pane3.add(Chauffeur_cb);
         pane3.add(TypeService1_p);
         pane3.add(NbTacheCh_p);
         pane3.add(WorkerTime_p);
-        //pane3.add(Box.createVerticalGlue());
         pane3.add(HeureChauffeurDepart_p);
         pane3.add(HeureChauffeurArrivee_p);
         pane3.add(Cost_p);
+        pane3.add(DiagGantt);
+
+
+
 
         Onglet3.add(pane3);
 
@@ -176,7 +196,6 @@ public class Interface extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(TexteComplet.isSelected()){
-                    System.out.println("Essai");
                     TexteComplet.setSelected(false);
                 }
                 if(marqueur == 1){
@@ -192,7 +211,6 @@ public class Interface extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(TexteSimplifie.isSelected()){
-                    System.out.println("Essai");
                     TexteSimplifie.setSelected(false);
                 }
                 if(marqueur == 1){
@@ -228,6 +246,8 @@ public class Interface extends JFrame implements ActionListener {
 	            	WorkerTime_c.getTexte().append(" "+ testSolution.GetHoraire(testSolution.getChauffeur(test).getWorkerTimeSum()));
                     HeureChauffeurDepart_c.getTexte().append(" " + testSolution.GetHoraire(testSolution.getChauffeur(test).getHeureDepart()));
                     HeureChauffeurArrivee_c.getTexte().append(" " + testSolution.GetHoraire(testSolution.getChauffeur(test).getHeureFin()));
+                    numeroChauffeur = test;
+
             	}
             }
         });
@@ -303,17 +323,21 @@ public class Interface extends JFrame implements ActionListener {
             //System.out.println(chemin);
 
 			String fichierSolution = file.getName();
+            nomFichier = new String(fichierSolution);
+            DiagGantt.setEnabled(true);
+
             System.out.println(fichierSolution);
             if(fichierSolution.contains("Solution")){
 			    testSolution = new Solution();
 			    testSolution.LectureSolution(fichierSolution);
-                //testSolution.LectureSolution(chemin);
             }
             else{
                 Fichier instance = new Fichier();
                 instance.LectureInstance(fichierSolution);
                 testSolution = new Solution();
                 testSolution.GenerationSolution(instance);
+
+
             }
 
 			ZoneTexte_c.getTexte().append("Chauffeur | Cout" + "\n");
